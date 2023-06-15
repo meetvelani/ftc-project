@@ -1,0 +1,110 @@
+@import "../../App.scss";
+
+.navbar {
+  background-color: #f1f1f1;
+  padding: 0.5rem 0;
+//   height: 12vh;
+  width: 100%;
+//   position: fixed;
+//   z-index: 10;
+  &-inner-box {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    gap: 1rem;
+    .logo-and-search {
+      display: flex;
+      gap: 4rem;
+      .logo {
+        display: flex;
+        width: 3rem;
+        cursor: pointer;
+        .logo-text {
+          color: $color-primary;
+          font-style: italic;
+          font-size: 2.5rem;
+          font-weight: 800;
+        }
+        .logo-img {
+          margin-top: 0.9rem;
+          margin-left: -0.6rem;
+          height: 2.8rem;
+        }
+      }
+      .search-box {
+        display: flex;
+        background-color: #fff;
+        align-items: center;
+        margin: auto 0;
+        padding: 0.3rem;
+        border-radius: 0.8rem;
+        width: 18rem;
+        @media (max-width: 750px) {
+          width: 100%;
+        }
+        .search-icon {
+          font-size: 1.5rem;
+          color: #717171;
+        }
+        input {
+          transition: all 0.3s;
+          outline: none !important;
+          border: none !important;
+          width: 100%;
+        }
+      }
+    }
+    .navbar-options {
+      display: flex;
+      gap: 1rem;
+      .icon-box {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        align-items: center;
+        width: 4rem;
+        cursor: pointer;
+        font-size: 0.7rem;
+        .option-icon {
+          color: $color-primary;
+          font-size: 1.5rem;
+        }
+        .profile-img {
+          width: 1.5rem;
+          border-radius: 50%;
+          border: 1px solid #717171;
+        }
+      }
+    }
+  }
+}
+
+// @media only screen and (max-width: 680px) {
+@media only screen and (max-width: 1060px) {
+  .navbar {
+    &-inner-box {
+      width: 90%;
+      .logo-and-search {
+        width: 90%;
+      }
+      .navbar-options {
+        .icon-box:not(:nth-of-type(4)) {
+          display: none;
+        }
+        .icon-box {
+          span {
+            display: none;
+          }
+          .option-icon {
+            font-size: 3rem;
+          }
+          .profile-img {
+            width: 3rem;
+          }
+        }
+      }
+    }
+  }
+}

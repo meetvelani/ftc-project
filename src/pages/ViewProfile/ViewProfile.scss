@@ -1,0 +1,49 @@
+@import "../../App.scss";
+
+.view-profile {
+  padding: 2rem 4rem;
+  background-color: $color-bg-primary;
+  padding-bottom: 5rem !important;
+//   height: 88vh;
+//   @media (max-width: 1060px) {
+//     height: 76vh;
+//   }
+  .inner-box {
+    display: grid;
+    grid-template-columns: 25vw 40vw 20vw;
+    gap: 1rem;
+    @media (max-width: 1060px) {
+      grid-template-columns: 30vw auto;
+    }
+    @media (max-width: 768px) {
+      gap: 2rem;
+      grid-template-columns: 1fr;
+    }
+    @media (max-width: 650px) {
+      gap: 2.5rem !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .view-profile {
+    padding: 2rem 3rem;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .view-profile {
+    padding: 1rem 2rem;
+    .inner-box {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .view-profile {
+    padding: 1rem 1rem;
+  }
+}

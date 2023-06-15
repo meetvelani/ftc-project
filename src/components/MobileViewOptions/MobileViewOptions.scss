@@ -1,0 +1,36 @@
+// Display only when the screen width is below 680px
+
+@import "../../App.scss";
+
+.bottom-options-container {
+  background-color: #f1f1f1;
+  padding: 1rem 0;
+  display: block;
+  // height: 12vh;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  .inner-box {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    .icon {
+      color: #969696;
+      font-size: 2.3rem;
+      cursor: pointer;
+      &:active {
+        color: $color-primary;
+      }
+    }
+  }
+}
+
+// @media only screen and (min-width: 681px) {
+@media only screen and (min-width: 1061px) {
+  .bottom-options-container {
+    display: none !important;
+  }
+}
