@@ -41,9 +41,9 @@
         @media (max-width: 1024px) {
           font-size: 1rem;
         }
-        // @media (min-width: 680px) and (max-width: 768px) {
-        //   font-size: 0.8rem;
-        // }
+        @media (max-width: 768px) {
+          font-size: 1.3rem;
+        }
       }
       div {
         display: flex;
