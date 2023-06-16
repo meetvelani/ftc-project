@@ -17,11 +17,15 @@
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    .icon {
-      color: #969696;
-      font-size: 2.3rem;
-      cursor: pointer;
-      &:active {
+    .icon-box {
+      .icon {
+        transition: all 0.3s ease-in-out;
+        color: #969696;
+        font-size: 2.3rem;
+        cursor: pointer;
+      }
+      :hover,
+      :active {
         color: $color-primary;
       }
     }

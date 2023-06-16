@@ -14,10 +14,12 @@ export const Navbar = () => {
     <div className="navbar">
       <div className="navbar-inner-box">
         <div className="logo-and-search">
-          <div className="logo">
-            <span className="logo-text">FT</span>
-            <img src={LogoImg} alt="logo" className="logo-img" />
-          </div>
+          <Link className="underline-none" to={"/"}>
+            <div className="logo">
+              <span className="logo-text">FT</span>
+              <img src={LogoImg} alt="logo" className="logo-img" />
+            </div>
+          </Link>
           <div className="search-box">
             <BiSearch className="search-icon" />
             <input type="text" placeholder="Search" />

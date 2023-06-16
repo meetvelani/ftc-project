@@ -77,6 +77,11 @@
         .option-icon {
           color: $color-primary !important;
           font-size: 1.5rem;
+          transition: all 0.3s;
+          :hover,
+          :active {
+            color: $color-primary-dark;
+          }
         }
         .profile-img {
           width: 1.5rem;
