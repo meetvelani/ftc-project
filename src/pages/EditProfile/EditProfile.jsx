@@ -136,7 +136,6 @@ export const EditProfile = () => {
             </div>
           </div>
         </div>
-        {/* <button className="btn">Update Profile</button> */}
       </form>
     </div>
   );
