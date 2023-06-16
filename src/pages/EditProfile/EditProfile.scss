@@ -1,0 +1,113 @@
+@import "../../App.scss";
+
+.edit-profile {
+  padding: 7rem 4rem 2rem 4rem;
+  background-color: $color-bg-primary;
+  min-height: 88vh !important;
+  @media (max-width: 1060px) {
+    min-height: 76vh !important;
+    padding: 5rem 2rem 6rem 2rem;
+  }
+  .inner-div {
+    background-color: #fff;
+    margin: 0 auto;
+    width: 80%;
+    padding: 2rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: relative;
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+    @media (max-width: 600px) {
+      padding-bottom: 4rem;
+    }
+    .image-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      @media (max-width:600px){
+        justify-content: center;
+      }
+      .image {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        margin-top: -6rem;
+        .profile-img {
+          width: 10rem;
+          border-radius: 50%;
+          border: 2px solid $color-primary;
+          //   @media (max-width: 768px) {
+          //     width: 10rem;
+          //   }
+        }
+        .edit-icon {
+          color: $color-primary;
+          font-size: 1.5rem;
+          position: absolute;
+          bottom: -0.5rem;
+        }
+      }
+      .btn {
+        @media (max-width: 600px) {
+          position: absolute;
+          bottom: 1rem;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+      }
+    }
+    .form {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+      .input-box {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        .label {
+          display: flex;
+          gap: 0.3rem;
+          align-items: center;
+          margin-left: 0.5rem;
+          .icon {
+            font-size: 1rem;
+          }
+          span {
+            font-size: 0.8rem;
+          }
+        }
+        .input-field {
+          background-color: $color-bg-primary;
+          width: 100%;
+          border-radius: 1rem;
+          padding: 0.5rem;
+          display: flex;
+          justify-content: space-between;
+          input {
+            outline: none;
+            border: none;
+            width: 100%;
+            &:disabled {
+              background-color: $color-bg-primary;
+            }
+          }
+          .edit-icon {
+            margin-left: 0.5rem;
+            cursor: pointer;
+          }
+        }
+        .enable-edit {
+          background-color: #fff;
+          border: 1px solid $color-bg-primary;
+        }
+      }
+    }
+  }
+}

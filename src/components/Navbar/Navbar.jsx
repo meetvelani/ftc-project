@@ -6,6 +6,7 @@ import { FaHome, FaBell } from "react-icons/fa";
 import { BsFillChatLeftTextFill, BsPersonCircle } from "react-icons/bs";
 import "./Navbar.scss";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const Navbar = () => {
   const [profileImg, setProfileImg] = useState(true);
@@ -36,16 +37,18 @@ export const Navbar = () => {
             <span>Notifications</span>
           </div>
           <div className="icon-box">
-            {profileImg ? (
-              <img
-                src="https://sm.ign.com/ign_ap/cover/a/avatar-gen/avatar-generations_hugw.jpg"
-                alt=""
-                className="profile-img"
-              />
-            ) : (
-              <BsPersonCircle className="option-icon" />
-            )}
-            <span>Me</span>
+            <Link className="underline-none" to={"/view-profile"}>
+              {profileImg ? (
+                <img
+                  src="https://sm.ign.com/ign_ap/cover/a/avatar-gen/avatar-generations_hugw.jpg"
+                  alt=""
+                  className="profile-img"
+                />
+              ) : (
+                <BsPersonCircle className="option-icon" />
+              )}
+              <span>Me</span>
+            </Link>
           </div>
         </div>
       </div>

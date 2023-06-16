@@ -1,13 +1,14 @@
 @import "../../App.scss";
 
 .view-profile {
-  padding: 2rem 4rem;
+  padding: 2rem 4rem 2rem 4rem;
   background-color: $color-bg-primary;
-  padding-bottom: 5rem !important;
-//   height: 88vh;
-//   @media (max-width: 1060px) {
-//     height: 76vh;
-//   }
+  @media (max-width: 1080px) {
+    padding: 1.7rem 4rem 1.7rem 4rem;
+  }
+  @media (max-width: 1060px) {
+    padding-bottom: 6rem !important;
+  }
   .inner-box {
     display: grid;
     grid-template-columns: 25vw 40vw 20vw;
@@ -22,12 +23,38 @@
     @media (max-width: 650px) {
       gap: 2.5rem !important;
     }
+
+    @media (min-width: 1060px) {
+      .posts,
+      .news {
+        height: calc((88vh - 4rem)) !important;
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+    }
+    .profile{
+      position: relative;
+    }
   }
 }
 
 @media only screen and (max-width: 1024px) {
   .view-profile {
     padding: 2rem 3rem;
+  }
+}
+@media only screen and (max-width: 1060px) {
+  .view-profile {
+    .inner-box {
+      .posts,
+      .news {
+        height: max-content;
+        overflow-y: 100% !important;
+      }
+    }
   }
 }
 

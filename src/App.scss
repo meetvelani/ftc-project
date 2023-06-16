@@ -31,18 +31,20 @@ body {
   color: $color-secondary;
 }
 
-.main {
-//   position: relative;
-}
-
 ::-webkit-scrollbar {
-  width: 6px;
-  scroll-behavior: smooth;
+  display: none;
 }
 
-::-webkit-scrollbar-thumb {
-  border-radius: 4px;
-  background-color: $color-primary;
+@media only screen and (min-width: 1060px) {
+  ::-webkit-scrollbar {
+    width: 6px;
+    scroll-behavior: smooth;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: $color-primary;
+  }
 }
 
 .btn {
@@ -54,4 +56,8 @@ body {
   padding: 0.5rem 1rem;
   cursor: pointer;
   font-size: 0.8rem;
+}
+
+.underline-none {
+  text-decoration: none;
 }

@@ -1,9 +1,10 @@
-import { MdLocationOn, MdPhone } from "react-icons/md";
+import { MdLocationOn, MdPhone, MdMailOutline } from "react-icons/md";
 import { SiGmail } from "react-icons/si";
-import { RiEditCircleFill, RiFile3Fill } from "react-icons/ri";
+import { RiFile3Fill } from "react-icons/ri";
 import ProfileImg from "../../assets/images/profile-picture.png";
 import CoinImg from "../../assets/images/coins.png";
 import EditIcon from "../../assets/images/edit-pic-icon.png";
+import { Link } from "react-router-dom";
 import "./Profile.scss";
 
 export const Profile = () => {
@@ -29,9 +30,11 @@ export const Profile = () => {
             <MdPhone className="icon" /> <span>+91 6845752132</span>
           </div>
           <div className="mail">
-            <SiGmail className="icon" /> <span>pranav@gmail.com</span>
+            <MdMailOutline className="icon" /> <span>pranav@gmail.com</span>
           </div>
-          <button className="btn">Edit Profile</button>
+          <Link to={"/edit-profile"}>
+            <button className="btn">Edit Profile</button>
+          </Link>
         </div>
       </div>
       <div className="bottom-options">
@@ -45,7 +48,7 @@ export const Profile = () => {
         </div>
         <div className="saved-posts">
           <div className="combined-box">
-            <RiFile3Fill className="icon"/>
+            <RiFile3Fill className="icon" />
             <span className="saved-post-text">Saved Posts</span>
           </div>
           <button className="btn">View</button>

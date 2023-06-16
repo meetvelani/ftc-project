@@ -3,10 +3,11 @@
 .navbar {
   background-color: #f1f1f1;
   padding: 0.5rem 0;
-//   height: 12vh;
+  height: 12vh;
   width: 100%;
-//   position: fixed;
-//   z-index: 10;
+  position: sticky;
+  top: 0;
+  z-index: 10;
   &-inner-box {
     margin: 0 auto;
     display: flex;
@@ -59,7 +60,8 @@
     .navbar-options {
       display: flex;
       gap: 1rem;
-      .icon-box {
+      .icon-box,
+      .underline-none {
         display: flex;
         flex-direction: column;
         gap: 0.2rem;
@@ -67,8 +69,13 @@
         width: 4rem;
         cursor: pointer;
         font-size: 0.7rem;
+        text-decoration: none;
+        color: $color-secondary;
+        &:active {
+          color: $color-primary-dark;
+        }
         .option-icon {
-          color: $color-primary;
+          color: $color-primary !important;
           font-size: 1.5rem;
         }
         .profile-img {

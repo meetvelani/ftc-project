@@ -24,7 +24,7 @@ export const ViewProfile = () => {
   return (
     <div className="view-profile">
       <div className="inner-box">
-        <div className="profile-div">
+        <div className="profile">
           <Profile />
         </div>
         <div className="posts">

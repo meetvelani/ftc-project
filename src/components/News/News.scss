@@ -3,18 +3,23 @@
 .news {
   background-color: #fff;
   border-radius: 1rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1rem 0 0.5rem !important;
   height: fit-content;
+  position: relative;
   h3 {
+    position: sticky;
+    top:0;
     font-size: 1rem;
     font-weight: 600;
+    width: 100%;
+    background-color: #fff;
   }
   .list-items {
     list-style: none;
     .list-item {
       margin: 0.5rem 0;
       li {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
       }
       li::before {
         content: "";
