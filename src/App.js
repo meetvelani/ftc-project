@@ -4,6 +4,7 @@ import { ViewProfile } from "./pages/ViewProfile/ViewProfile";
 import { Navbar } from "./components/Navbar/Navbar";
 import { MobileViewOptions } from "./components/MobileViewOptions/MobileViewOptions";
 import { EditProfile } from "./pages/EditProfile/EditProfile";
+import { Shop } from "./pages/Shop/Shop";
 
 function App() {
   return (
@@ -26,6 +27,16 @@ function App() {
               <>
                 <Navbar />
                 <EditProfile />
+                <MobileViewOptions />
+              </>
+            }
+          />
+          <Route
+            path="/shop"
+            element={
+              <>
+                <Navbar />
+                <Shop />
                 <MobileViewOptions />
               </>
             }

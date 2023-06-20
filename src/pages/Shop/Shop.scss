@@ -1,0 +1,97 @@
+@import "../../App.scss";
+
+.shop {
+  padding: 5rem 4rem 2rem 4rem;
+  background-color: $color-bg-primary;
+  min-height: 88vh !important;
+  @media (max-width: 1060px) {
+    min-height: 76vh !important;
+    padding: 3rem 2rem 6rem 2rem;
+  }
+  @media (max-width: 700px) {
+    padding: 3rem 2rem 10rem 2rem;
+  }
+  .inner-div {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    justify-items: center;
+    h1 {
+      color: $color-primary;
+      font-size: 2.2rem;
+      span {
+        font-weight: 500;
+      }
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      @media (max-width: 700px) {
+        grid-template-columns: repeat(1, 1fr);
+        width: 100%;
+    }
+    .coin-card {
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        background-color: #fff;
+        border-radius: 1rem;
+        padding: 1rem;
+        box-shadow: 0.1rem 0.1rem 0.5rem rgba(0, 0, 0, 0.2);
+        @media (max-width: 700px) {
+          grid-template-columns: repeat(2, 1fr);
+          align-items: center;
+        }
+        .coin-img {
+          width: 10rem;
+        }
+        .add-and-remove {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 0.5rem;
+          border-radius: 2rem;
+          background-color: $color-bg-primary;
+          padding: 0.3rem 0.3rem 0 0.3rem;
+          .icon {
+              color: $color-primary;
+              font-size: 1.2rem;
+              cursor: pointer;
+            }
+            span {
+                margin-top: -0.3rem;
+                font-size: 1.1rem;
+            }
+            @media (max-width: 700px) {
+              padding: 1rem;
+              .icon {
+                font-size: 1.5rem;
+              }
+              span {
+                font-size: 1.4rem;
+                margin-top: -0.4rem;
+              }
+            }
+        }
+      }
+    }
+    .buy-now-section {
+      display: flex;
+      gap: 1rem;
+      .coin-box {
+        background-color: #fff;
+        border-radius: 2rem;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.5rem 1rem;
+        img {
+          width: 2rem;
+        }
+      }
+    }
+  }
+}

@@ -5,7 +5,8 @@
 .bottom-options-container {
   background-color: #f1f1f1;
   padding: 1rem 0;
-  display: block;
+  display: flex;
+  align-items: center;
   height: 12vh;
   position: fixed;
   bottom: 0;
@@ -17,15 +18,17 @@
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     .icon-box {
       .icon {
         transition: all 0.3s ease-in-out;
         color: #969696;
-        font-size: 2.3rem;
+        font-size: 2.2rem;
         cursor: pointer;
       }
       :hover,
-      :active {
+      :active,
+      .active {
         color: $color-primary;
       }
     }

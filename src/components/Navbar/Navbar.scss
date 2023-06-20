@@ -8,6 +8,8 @@
   position: sticky;
   top: 0;
   z-index: 10;
+  display: flex;
+  align-items: center;
   &-inner-box {
     margin: 0 auto;
     display: flex;
@@ -89,6 +91,9 @@
           border: 1px solid #717171;
         }
       }
+      .active{
+        border-bottom: 2px solid $color-primary;
+      }
     }
   }
 }
@@ -102,7 +107,7 @@
         width: 90%;
       }
       .navbar-options {
-        .icon-box:not(:nth-of-type(4)) {
+        .icon-box:not(:nth-of-type(4),:nth-of-type(5)) {
           display: none;
         }
         .icon-box {
@@ -112,9 +117,15 @@
           .option-icon {
             font-size: 3rem;
           }
+          .shop-icon{
+            height: 0.5rem !important;
+          }
           .profile-img {
             width: 3rem;
           }
+        }
+        .active{
+          border-bottom: none;
         }
       }
     }

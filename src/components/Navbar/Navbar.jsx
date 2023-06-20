@@ -3,13 +3,16 @@ import { BiSearch } from "react-icons/bi";
 import { MdChat } from "react-icons/md";
 import { TbBellFilled } from "react-icons/tb";
 import { FaHome, FaBell } from "react-icons/fa";
+import { IoIosBasket } from "react-icons/io";
 import { BsFillChatLeftTextFill, BsPersonCircle } from "react-icons/bs";
 import "./Navbar.scss";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
+  const { pathname } = useLocation();
   const [profileImg, setProfileImg] = useState(true);
+  const navigate = useNavigate();
   return (
     <div className="navbar">
       <div className="navbar-inner-box">
@@ -26,19 +29,28 @@ export const Navbar = () => {
           </div>
         </div>
         <div className="navbar-options">
-          <div className="icon-box">
+          <div className={`icon-box ${pathname === "/" && "active"}`}>
             <FaHome className="option-icon" />
             <span>Home</span>
           </div>
-          <div className="icon-box">
+          <div className={`icon-box ${pathname === "/" && "active"}`}>
             <MdChat className="option-icon" />
             <span>Messaging</span>
           </div>
-          <div className="icon-box">
+          <div className={`icon-box ${pathname === "/" && "active"}`}>
             <TbBellFilled className="option-icon" />
             <span>Notifications</span>
           </div>
-          <div className="icon-box">
+          <div
+            className={`icon-box ${pathname === "/shop" && "active"}`}
+            onClick={() => navigate("/shop")}
+          >
+            <IoIosBasket className="option-icon" />
+            <span>Shop</span>
+          </div>
+          <div
+            className={`icon-box ${pathname === "/view-profile" && "active"}`}
+          >
             <Link className="underline-none" to={"/view-profile"}>
               {profileImg ? (
                 <img
