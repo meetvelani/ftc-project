@@ -12,6 +12,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 export const Navbar = () => {
   const { pathname } = useLocation();
   const [profileImg, setProfileImg] = useState(true);
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
   const navigate = useNavigate();
   return (
     <div className="navbar">
@@ -23,47 +24,69 @@ export const Navbar = () => {
               <img src={LogoImg} alt="logo" className="logo-img" />
             </div>
           </Link>
-          <div className="search-box">
-            <BiSearch className="search-icon" />
-            <input type="text" placeholder="Search" />
-          </div>
+          {userLoggedIn && (
+            <div className="search-box">
+              <BiSearch className="search-icon" />
+              <input type="text" placeholder="Search" />
+            </div>
+          )}
         </div>
         <div className="navbar-options">
-          <div className={`icon-box ${pathname === "/" && "active"}`}>
-            <FaHome className="option-icon" />
-            <span>Home</span>
-          </div>
-          <div className={`icon-box ${pathname === "/" && "active"}`}>
-            <MdChat className="option-icon" />
-            <span>Messaging</span>
-          </div>
-          <div className={`icon-box ${pathname === "/" && "active"}`}>
-            <TbBellFilled className="option-icon" />
-            <span>Notifications</span>
-          </div>
-          <div
-            className={`icon-box ${pathname === "/shop" && "active"}`}
-            onClick={() => navigate("/shop")}
-          >
-            <IoIosBasket className="option-icon" />
-            <span>Shop</span>
-          </div>
-          <div
-            className={`icon-box ${pathname === "/view-profile" && "active"}`}
-          >
-            <Link className="underline-none" to={"/view-profile"}>
-              {profileImg ? (
-                <img
-                  src="https://sm.ign.com/ign_ap/cover/a/avatar-gen/avatar-generations_hugw.jpg"
-                  alt=""
-                  className="profile-img"
-                />
-              ) : (
-                <BsPersonCircle className="option-icon" />
-              )}
-              <span>Me</span>
+          {userLoggedIn ? (
+            <>
+              <div className={`icon-box ${pathname === "/" && "active"}`}>
+                <FaHome className="option-icon" />
+                <span>Home</span>
+              </div>
+              <div
+                className={`icon-box ${pathname === "/messaging" && "active"}`}
+              >
+                <MdChat className="option-icon" />
+                <span>Messaging</span>
+              </div>
+              <div
+                className={`icon-box ${
+                  pathname === "/notifications" && "active"
+                }`}
+              >
+                <TbBellFilled className="option-icon" />
+                <span>Notifications</span>
+              </div>
+              <div
+                className={`icon-box ${pathname === "/shop" && "active"}`}
+                onClick={() => navigate("/shop")}
+              >
+                <IoIosBasket className="option-icon" />
+                <span>Shop</span>
+              </div>
+              <div
+                className={`icon-box ${
+                  pathname === "/view-profile" && "active"
+                }`}
+              >
+                <Link className="underline-none" to={"/view-profile"}>
+                  {profileImg ? (
+                    <img
+                      src="https://sm.ign.com/ign_ap/cover/a/avatar-gen/avatar-generations_hugw.jpg"
+                      alt=""
+                      className="profile-img"
+                    />
+                  ) : (
+                    <BsPersonCircle className="option-icon" />
+                  )}
+                  <span>Me</span>
+                </Link>
+              </div>
+            </>
+          ) : pathname === "/sign-in" ? (
+            <Link to={"/sign-up"}>
+              <button className="btn">Sign Up</button>
             </Link>
-          </div>
+          ) : (
+            <Link to={"/sign-in"}>
+              <button className="btn">Sign In</button>
+            </Link>
+          )}
         </div>
       </div>
     </div>

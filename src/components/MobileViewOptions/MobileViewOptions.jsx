@@ -10,7 +10,7 @@ export const MobileViewOptions = () => {
   return (
     <div className="bottom-options-container">
       <div className="inner-box">
-        <Link to={'/'}>
+        <Link to={"/"}>
           <div className={`icon-box ${pathname === "/" && "active"}`}>
             <FaHome className="icon" />
           </div>
