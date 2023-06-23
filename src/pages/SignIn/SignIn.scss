@@ -67,6 +67,9 @@
           color: $color-primary;
           @include buttonStyles();
           padding-block: 1rem;
+          &:hover{
+            background-color: $color-bg-primary-dark;
+          }
           @media (max-width: 450px) {
             color: #fff;
             background-color: $color-primary;

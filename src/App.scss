@@ -4,6 +4,7 @@ $color-primary: #2867b2;
 $color-primary-dark: #235797;
 $color-secondary: #464646;
 $color-bg-primary: #e9e9e9;
+$color-bg-primary-dark: #cfcfcf;
 
 *,
 *::after,
@@ -16,7 +17,7 @@ $color-bg-primary: #e9e9e9;
 
 html {
   // This defines what 1 rem is.
-    // font-size: 62.5%;
+  // font-size: 62.5%;
   font-size: 16px;
 }
 
@@ -34,18 +35,23 @@ html {
   cursor: pointer;
   font-size: 0.9rem;
   font-weight: 500;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    box-shadow: 1px 1px 1rem rgba(0, 0, 0, 0.2);
+  }
 }
 
 body {
   box-sizing: border-box;
   color: $color-secondary;
+  background-color: $color-bg-primary !important;
 }
 
 ::-webkit-scrollbar {
   display: none;
 }
 
-input:focus{
+input:focus {
   background-color: #fff !important;
 }
 
@@ -61,12 +67,40 @@ input:focus{
   }
 }
 
-.btn {
+.button-primary {
   @include buttonStyles();
   background-color: $color-primary;
   color: #fff;
+  &:hover {
+    background-color: $color-primary-dark;
+  }
 }
 
 .underline-none {
   text-decoration: none;
+}
+
+.text-green {
+  color: green;
+}
+
+.text-red {
+  color: red;
+}
+
+.online-icon {
+  height: 0.6rem;
+  width: 0.6rem;
+  border-radius: 50%;
+  background-color: rgb(1, 182, 1);
+  animation: onlineIcon 1s infinite ease-in;
+}
+
+@keyframes onlineIcon {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

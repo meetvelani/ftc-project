@@ -1,0 +1,138 @@
+@import "../../../App.scss";
+
+.modal-body {
+  border-radius: 1rem;
+  .content {
+    .head {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      .icon-div {
+        cursor: pointer;
+      }
+    }
+    .form-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      .add-img {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .added-img {
+          width: 6rem;
+          border-radius: 50%;
+          border: 2px solid $color-primary;
+        }
+        .default {
+          width: calc(5rem + 1rem);
+          height: calc(5rem + 1rem);
+          border-radius: 50%;
+          background-color: gray;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .default-img {
+            font-size: 5rem;
+            color: $color-bg-primary;
+            cursor: pointer;
+          }
+        }
+        span {
+          font-weight: 500;
+          text-align: center;
+        }
+      }
+      .form {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        width: 100%;
+        gap: 1rem;
+
+        .input-box {
+          width: 100%;
+          font-size: 1rem;
+          display: flex;
+          align-items: center;
+          gap: 0.3rem;
+          label {
+            font-size: 0.8rem;
+            @media (max-width: 550px) {
+              display: none;
+            }
+          }
+          input {
+            width: 100%;
+            border: none;
+            outline: none;
+            background-color: $color-bg-primary;
+            border-radius: 1rem;
+            font-size: 0.9rem;
+            padding: 0.3rem;
+            border: 1px solid $color-bg-primary-dark;
+            &:focus {
+              background-color: #fff;
+            }
+            &::placeholder {
+              visibility: hidden;
+            }
+            @media (max-width: 550px) {
+              &::placeholder {
+                visibility: visible;
+              }
+            }
+          }
+        }
+        .combined {
+          display: grid;
+          gap: 1rem;
+        }
+        .combined-1 {
+          grid-template-columns: 8rem 10rem auto;
+        }
+        .combined-2 {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .combined-3 {
+          grid-template-columns: repeat(2, 1fr);
+          //   .input-box {
+          //     input {
+          //       width: 70%;
+          //     }
+          //   }
+        }
+        @media (max-width: 550px) {
+          .combined-1 {
+            grid-template-columns: repeat(2, 1fr);
+            .email {
+              grid-column: 1 / span 3;
+            }
+          }
+        }
+      }
+    }
+    .button-primary {
+      padding-inline: 2rem;
+    }
+
+    .table-content {
+      .table {
+        text-align: center;
+        thead {
+          tr {
+            background-color: $color-primary;
+            color: #fff;
+            font-weight: 600;
+          }
+        }
+      }
+      .buttons{
+        display: flex;
+        gap:1rem;
+        justify-content: center;
+      }
+    }
+  }
+}

@@ -44,7 +44,7 @@ export const EditProfile = () => {
             />
             <img src={EditIcon} alt="edit-icon" className="edit-icon" />
           </div>
-          <button className="btn">Update Profile</button>
+          <button className="button-primary">Update Profile</button>
         </div>
         <div className="form">
           <div className="input-box">

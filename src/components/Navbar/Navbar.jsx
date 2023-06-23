@@ -12,7 +12,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 export const Navbar = () => {
   const { pathname } = useLocation();
   const [profileImg, setProfileImg] = useState(true);
-  const [userLoggedIn, setUserLoggedIn] = useState(false);
+  const [userLoggedIn, setUserLoggedIn] = useState(
+    pathname !== "/sign-in" || "/sign-up" ? true : false
+  );
   const navigate = useNavigate();
   return (
     <div className="navbar">
@@ -35,29 +37,38 @@ export const Navbar = () => {
           {userLoggedIn ? (
             <>
               <div className={`icon-box ${pathname === "/" && "active"}`}>
-                <FaHome className="option-icon" />
-                <span>Home</span>
+                <Link to={"/"} className="underline-none">
+                  <FaHome className="option-icon" />
+                  <span>Home</span>
+                </Link>
               </div>
               <div
                 className={`icon-box ${pathname === "/messaging" && "active"}`}
               >
-                <MdChat className="option-icon" />
-                <span>Messaging</span>
+                <Link to={"/messaging"} className="underline-none">
+                  <MdChat className="option-icon" />
+                  <span>Messaging</span>
+                </Link>
               </div>
               <div
                 className={`icon-box ${
                   pathname === "/notifications" && "active"
                 }`}
               >
-                <TbBellFilled className="option-icon" />
-                <span>Notifications</span>
+                <Link to={"/notifications"} className="underline-none">
+                  <TbBellFilled className="option-icon" />
+                  <span>Notifications</span>
+                </Link>
               </div>
+
               <div
                 className={`icon-box ${pathname === "/shop" && "active"}`}
                 onClick={() => navigate("/shop")}
               >
-                <IoIosBasket className="option-icon" />
-                <span>Shop</span>
+                <Link to={"/shop"} className="underline-none">
+                  <IoIosBasket className="option-icon" />
+                  <span>Shop</span>
+                </Link>
               </div>
               <div
                 className={`icon-box ${
@@ -80,11 +91,11 @@ export const Navbar = () => {
             </>
           ) : pathname === "/sign-in" ? (
             <Link to={"/sign-up"}>
-              <button className="btn">Sign Up</button>
+              <button className="button-primary">Sign Up</button>
             </Link>
           ) : (
             <Link to={"/sign-in"}>
-              <button className="btn">Sign In</button>
+              <button className="button-primary">Sign In</button>
             </Link>
           )}
         </div>

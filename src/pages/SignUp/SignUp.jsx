@@ -1,17 +1,34 @@
 import { useState } from "react";
 import "./SignUp.scss";
 import GoogleIcon from "../../assets/images/google.png";
-import LinkedInIcon from "../../assets/images/linkedin.png";
 import FacebookIcon from "../../assets/images/facebook.png";
-import TwitterIcon from "../../assets/images/twitter.png";
 import BgImage from "../../assets/images/sign-up-image.png";
-import { useRef } from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export const SignUp = () => {
   const [today, setToday] = useState();
   const [gender, setGender] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [passwordError, setPasswordError] = useState({});
   //   const dateRef = useRef(null);
+
+  //   const validatePassword = () => {
+//     const passwordRegexes = [
+//         { regex: /.{8,}/, index: 0 }, // minimum 8 characters
+//         { regex: /[0-9]/, index: 1 }, // at least 1 number
+//         { regex: /[a-z]/, index: 2 }, // at least 1 lowercase letter
+//         { regex: /[A-Z]/, index: 3 }, // at least 1 uppercase letter
+//         { regex: /[^A-Za-z0-9]/, index: 4 }, // at least 1 special character
+//       ];
+//   //   }
+
+//   const handleChange = (e) => {
+//     passwordRegexes.forEach(item=>{
+//         const isValid = item.regex.test(e.target.value)
+//     })
+//   };
+
 
   // Handle gender selection
   const handleGenderSelect = (str) => {
@@ -53,7 +70,11 @@ export const SignUp = () => {
               <input type="text" placeholder="Username" />
             </div>
             <div className="input-box">
-              <input type="password" placeholder="Password" />
+              <input
+                type="password"
+                // onChange={handleChange}
+                placeholder="Password"
+              />
             </div>
             <div className="input-box">
               <input type="password" placeholder="Confirm password" />
@@ -61,17 +82,13 @@ export const SignUp = () => {
             <div className="gender-and-dob">
               <div className="genders">
                 <div
-                  className={`gender ${
-                    gender ==='male' ? "selected" : ""
-                  }`}
+                  className={`gender ${gender === "male" ? "selected" : ""}`}
                   onClick={() => handleGenderSelect("male")}
                 >
                   Male
                 </div>
                 <div
-                  className={`gender ${
-                    gender ==='female' ? "selected" : ""
-                  }`}
+                  className={`gender ${gender === "female" ? "selected" : ""}`}
                   onClick={() => handleGenderSelect("female")}
                 >
                   Female
@@ -101,7 +118,9 @@ export const SignUp = () => {
               </div>
             </div>
             <div className="sign-up-buttons">
-              <button className="btn">Sign up</button>
+              <Link to={"/"} className="underline-none">
+                <button className="button-primary">Sign up</button>
+              </Link>
               <div className="sign-in-with">
                 <img src={GoogleIcon} alt="google-icon" />
                 <span>Sign in with google</span>

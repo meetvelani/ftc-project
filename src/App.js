@@ -7,6 +7,8 @@ import { EditProfile } from "./pages/EditProfile/EditProfile";
 import { Shop } from "./pages/Shop/Shop";
 import { SignIn } from "./pages/SignIn/SignIn";
 import { SignUp } from "./pages/SignUp/SignUp";
+import { Messaging } from "./pages/Messaging/Messaging";
+import { Home } from "./pages/Home/Home";
 
 function App() {
   return (
@@ -18,20 +20,7 @@ function App() {
             element={
               <>
                 <Navbar />
-                <div>
-                  <h3>Completed pages</h3>
-                  <ul>
-                    <li>
-                      <Link to={"/view-profile"}>View Profile</Link>
-                    </li>
-                    <li>
-                      <Link to={"/edit-profile"}>Edit Profile</Link>
-                    </li>
-                    <li>
-                      <Link to={"/shop"}>Shop</Link>
-                    </li>
-                  </ul>
-                </div>
+                <Home/>
                 <MobileViewOptions />
               </>
             }
@@ -80,6 +69,16 @@ function App() {
               <>
                 <Navbar />
                 <Shop />
+                <MobileViewOptions />
+              </>
+            }
+          />
+          <Route
+            path="/messaging"
+            element={
+              <>
+                <Navbar />
+                <Messaging />
                 <MobileViewOptions />
               </>
             }

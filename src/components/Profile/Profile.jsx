@@ -33,7 +33,7 @@ export const Profile = () => {
             <MdMailOutline className="icon" /> <span>pranav@gmail.com</span>
           </div>
           <Link to={"/edit-profile"}>
-            <button className="btn">Edit Profile</button>
+            <button className="button-primary">Edit Profile</button>
           </Link>
         </div>
       </div>
@@ -44,14 +44,14 @@ export const Profile = () => {
             <img src={CoinImg} className="icon" alt="coin" />
             <span className="total-coins">1200</span>
           </div>
-          <button className="btn">Buy more</button>
+          <button className="button-primary">Buy more</button>
         </div>
         <div className="saved-posts">
           <div className="combined-box">
             <RiFile3Fill className="icon" />
             <span className="saved-post-text">Saved Posts</span>
           </div>
-          <button className="btn">View</button>
+          <button className="button-primary">View</button>
         </div>
       </div>
     </div>

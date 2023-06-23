@@ -72,7 +72,7 @@ export const Post = ({ post }) => {
             </div>
           </div>
         </div>
-        <button className="btn">View Post</button>
+        <button className="button-primary">View Post</button>
       </div>
     </div>
   );

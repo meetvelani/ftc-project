@@ -20,7 +20,7 @@ export const Shop = () => {
             <img src={CoinIcon} alt="icon" />
             <span>0</span>
           </div>
-          <button className="btn">Buy Now</button>
+          <button className="button-primary">Buy Now</button>
         </div>
       </div>
     </div>
