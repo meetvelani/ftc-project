@@ -104,3 +104,12 @@ input:focus {
     opacity: 0;
   }
 }
+
+.slick-prev,.slick-next{
+  color: $color-primary;
+  font-size: 4rem !important;
+  cursor: pointer;
+  &:hover{
+    color: $color-primary-dark;
+  }
+}

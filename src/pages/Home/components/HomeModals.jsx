@@ -8,6 +8,10 @@ import { Table } from "react-bootstrap";
 import { ReactComponent as AddPhotoIcon } from "../../../assets/icons/add-photo.svg";
 import { ReactComponent as AddDocIcon } from "../../../assets/icons/add-document.svg";
 import { ReactComponent as AddMediaIcon } from "../../../assets/icons/add-media.svg";
+import { useRef } from "react";
+import { toast } from "react-hot-toast";
+import Slider from "react-slick";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 export const CreatePostModal = (props) => {
   const {
@@ -33,8 +37,6 @@ export const CreatePostModal = (props) => {
       organization: "",
     },
   });
-  const values = getValues();
-  console.log(values, "values");
 
   return (
     <Modal
@@ -77,7 +79,6 @@ export const CreatePostModal = (props) => {
                   <label htmlFor="name">Name</label>
                   <input
                     {...register("name")}
-                    defaultValue={getValues("name")}
                     name="name"
                     type="text"
                     placeholder="Name"
@@ -313,6 +314,49 @@ export const ConfirmationModal = (props) => {
 };
 
 export const AddMoreDetailsModal = (props) => {
+  const mediaRef = useRef();
+  const docRef = useRef();
+  const photoRef = useRef();
+  const [imgs, setImgs] = useState([]);
+
+  const onImgChange = (file) => {
+    const allPhotos = Object.values(file.target.files);
+    if (file.target.files && file.target.files[0]) {
+      const images = allPhotos.map((file) => {
+        if (
+          file.type === "image/x-png" ||
+          file.type === "image/jpeg" ||
+          file.type === "image/jpg"
+        ) {
+          let img = file;
+          // setImg({ image: URL.createObjectURL(img) });
+          return { image: URL.createObjectURL(img) };
+        } else {
+          return toast("Select an image file", {
+            icon: "❌",
+            position: "top-center",
+            style: {
+              borderRadius: "10px",
+              // background: "#333",
+              // color: "#fff",
+            },
+          });
+        }
+      });
+      setImgs(images);
+      console.log(images);
+    }
+  };
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    prevArrow: <IoIosArrowBack className="slick-prev" />,
+    nextArrow: <IoIosArrowForward className="slick-next" />,
+  };
   return (
     <Modal
       {...props}
@@ -337,22 +381,39 @@ export const AddMoreDetailsModal = (props) => {
                 name="description"
                 id=""
                 cols="30"
-                rows="10"
+                rows="6"
               ></textarea>
             </div>
 
+            {imgs && (
+              <div className="img-slider">
+                <Slider {...settings} className="slider">
+                  {imgs.map((img) => (
+                    <img src={img.image} alt="" className="slider-img" />
+                  ))}
+                </Slider>
+              </div>
+            )}
             <div className="bottom-section">
               <div className="options">
-                <div className="item">
-                  <AddPhotoIcon className="icon"/>
+                <input
+                  type="file"
+                  ref={photoRef}
+                  multiple
+                  accept="image/x-png,image/jpeg,image/jpg"
+                  onChange={(e) => onImgChange(e)}
+                  hidden
+                />
+                <div className="item" onClick={() => photoRef.current.click()}>
+                  <AddPhotoIcon className="icon" />
                   <span>Add Photo</span>
                 </div>
                 <div className="item">
-                  <AddMediaIcon className="icon"/>
+                  <AddMediaIcon className="icon" />
                   <span>Add Media</span>
                 </div>
                 <div className="item">
-                  <AddDocIcon className="icon"/>
+                  <AddDocIcon className="icon" />
                   <span>Add Document</span>
                 </div>
               </div>

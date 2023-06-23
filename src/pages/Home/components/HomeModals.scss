@@ -1,5 +1,8 @@
 @import "../../../App.scss";
 
+.slider-img {
+  height: 100%;
+}
 .modal-body {
   border-radius: 1rem;
   .content {
@@ -133,9 +136,9 @@
             font-size: 0.9rem;
           }
         }
-        tbody{
-          tr{
-            td{
+        tbody {
+          tr {
+            td {
               font-size: 0.9rem;
             }
           }
@@ -151,6 +154,22 @@
           padding: 0.5rem;
           border: none;
           outline: none;
+        }
+      }
+      .img-slider {
+        padding: 2rem;
+        .slick-list {
+          height: 15rem !important;
+          .slick-track {
+            height: 15rem !important;
+            .slick-slide {
+              height: 15rem !important;
+              .slider-img{
+                height: 15rem !important;
+                object-fit: contain;
+              }
+            }
+          }
         }
       }
       .bottom-section {
