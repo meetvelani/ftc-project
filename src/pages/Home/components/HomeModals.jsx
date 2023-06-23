@@ -3,8 +3,11 @@ import "./HomeModals.scss";
 import { GrFormClose } from "react-icons/gr";
 import { TbCameraPlus } from "react-icons/tb";
 import { useState } from "react";
-import { get, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Table } from "react-bootstrap";
+import { ReactComponent as AddPhotoIcon } from "../../../assets/icons/add-photo.svg";
+import { ReactComponent as AddDocIcon } from "../../../assets/icons/add-document.svg";
+import { ReactComponent as AddMediaIcon } from "../../../assets/icons/add-media.svg";
 
 export const CreatePostModal = (props) => {
   const {
@@ -305,7 +308,6 @@ export const ConfirmationModal = (props) => {
           </div>
         </div>
       </div>
-      {/* <CreatePostModal show={showForm} onHide={() => setShowForm(false)} /> */}
     </Modal>
   );
 };
@@ -327,9 +329,33 @@ export const AddMoreDetailsModal = (props) => {
               <GrFormClose className="icon" size={25} onClick={props.onHide} />
             </div>
           </div>
-          <div className="table-content">
-            Add More Details
-            <div className="buttons">
+          <hr />
+          <div className="addmore-div">
+            <div className="text-field">
+              <textarea
+                placeholder="Type something..."
+                name="description"
+                id=""
+                cols="30"
+                rows="10"
+              ></textarea>
+            </div>
+
+            <div className="bottom-section">
+              <div className="options">
+                <div className="item">
+                  <AddPhotoIcon className="icon"/>
+                  <span>Add Photo</span>
+                </div>
+                <div className="item">
+                  <AddMediaIcon className="icon"/>
+                  <span>Add Media</span>
+                </div>
+                <div className="item">
+                  <AddDocIcon className="icon"/>
+                  <span>Add Document</span>
+                </div>
+              </div>
               <button className="button-primary" onClick={props.onPost}>
                 Post
               </button>
