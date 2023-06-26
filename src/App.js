@@ -10,83 +10,86 @@ import { SignUp } from "./pages/SignUp/SignUp";
 import { Messaging } from "./pages/Messaging/Messaging";
 import { Home } from "./pages/Home/Home";
 import { Toaster } from "react-hot-toast";
+import { Worker } from "@react-pdf-viewer/core";
 
 function App() {
   return (
     <div className="main">
-      <Toaster position="top-center" reverseOrder={false} />
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Navbar />
-                <Home />
-                <MobileViewOptions />
-              </>
-            }
-          />
-          <Route
-            path="/sign-in"
-            element={
-              <>
-                <Navbar />
-                <SignIn />
-              </>
-            }
-          />
-          <Route
-            path="/sign-up"
-            element={
-              <>
-                <Navbar />
-                <SignUp />
-              </>
-            }
-          />
-          <Route
-            path="/view-profile"
-            element={
-              <>
-                <Navbar />
-                <ViewProfile />
-                <MobileViewOptions />
-              </>
-            }
-          />
-          <Route
-            path="/edit-profile"
-            element={
-              <>
-                <Navbar />
-                <EditProfile />
-                <MobileViewOptions />
-              </>
-            }
-          />
-          <Route
-            path="/shop"
-            element={
-              <>
-                <Navbar />
-                <Shop />
-                <MobileViewOptions />
-              </>
-            }
-          />
-          <Route
-            path="/messaging"
-            element={
-              <>
-                <Navbar />
-                <Messaging />
-                <MobileViewOptions />
-              </>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
+      <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
+        <Toaster position="top-center" reverseOrder={false} />
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Navbar />
+                  <Home />
+                  <MobileViewOptions />
+                </>
+              }
+            />
+            <Route
+              path="/sign-in"
+              element={
+                <>
+                  <Navbar />
+                  <SignIn />
+                </>
+              }
+            />
+            <Route
+              path="/sign-up"
+              element={
+                <>
+                  <Navbar />
+                  <SignUp />
+                </>
+              }
+            />
+            <Route
+              path="/view-profile"
+              element={
+                <>
+                  <Navbar />
+                  <ViewProfile />
+                  <MobileViewOptions />
+                </>
+              }
+            />
+            <Route
+              path="/edit-profile"
+              element={
+                <>
+                  <Navbar />
+                  <EditProfile />
+                  <MobileViewOptions />
+                </>
+              }
+            />
+            <Route
+              path="/shop"
+              element={
+                <>
+                  <Navbar />
+                  <Shop />
+                  <MobileViewOptions />
+                </>
+              }
+            />
+            <Route
+              path="/messaging"
+              element={
+                <>
+                  <Navbar />
+                  <Messaging />
+                  <MobileViewOptions />
+                </>
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      </Worker>
     </div>
   );
 }

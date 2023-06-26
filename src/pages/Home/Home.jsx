@@ -57,10 +57,10 @@ export const Home = () => {
         </div>
       </div>
       <div className="news-section">
-        <div className="news-list">
+        {/* <div className="news-list"> */}
           {/* <span>There's nothing to display</span> */}
           <News />
-        </div>
+        {/* </div> */}
       </div>
     </div>
   );

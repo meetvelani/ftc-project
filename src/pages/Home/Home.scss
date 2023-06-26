@@ -39,6 +39,7 @@
     border-radius: 1rem;
     box-shadow: 1px 1px 0.8rem rgba(0, 0, 0, 0.2);
     padding-bottom: 2rem;
+    height: fit-content;
     @media (max-width:1060px){
         display: none;
     }

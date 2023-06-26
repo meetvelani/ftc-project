@@ -18,14 +18,36 @@
       justify-content: center;
       margin-bottom: 1.5rem;
       .profile-img {
-        width: 60%;
+        object-fit: cover;
         border-radius: 50%;
         border: 2px solid $color-primary;
+        width: 8rem;
+        height: 8rem;
         @media (max-width: 768px) {
           width: 10rem;
+          height: 10rem;
+        }
+      }
+      .default {
+        width: 8rem;
+        height: 8rem;
+        border-radius: 50%;
+        border: 2px solid $color-primary;
+        background-color: gray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .default-img {
+          font-size: 5rem;
+          color: $color-bg-primary;
+          @media (max-width: 768px) {
+            width: 5rem;
+            height: 5rem;
+          }
         }
       }
       .edit-icon {
+        cursor: pointer;
         color: $color-primary;
         font-size: 1.5rem;
         position: absolute;

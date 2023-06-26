@@ -6,19 +6,57 @@ import CoinImg from "../../assets/images/coins.png";
 import EditIcon from "../../assets/images/edit-pic-icon.png";
 import { Link } from "react-router-dom";
 import "./Profile.scss";
+import { toast } from "react-hot-toast";
+import { useRef } from "react";
+import { useState } from "react";
+import { TbCameraPlus } from "react-icons/tb";
 
 export const Profile = () => {
+  const imgRef = useRef();
+  const [profileImg, setProfileImg] = useState("");
+
+  const handleProfileImgChange = (e) => {
+    if (
+      e.target.files[0].type === "image/x-png" ||
+      e.target.files[0].type === "image/jpeg" ||
+      e.target.files[0].type === "image/jpg"
+    ) {
+      const profileDp = e.target.files[0];
+      return setProfileImg(URL.createObjectURL(profileDp));
+    } else {
+      return toast("Select an image file", {
+        icon: "❌",
+        position: "top-center",
+        style: {
+          borderRadius: "10px",
+        },
+      });
+    }
+  };
   return (
     <div className="profile-container">
       <div className="profile">
         <div className="image">
-          {/* <img src={ProfileImg} alt="profile" className="profile-img" /> */}
-          <img
-            src="https://sm.ign.com/ign_ap/cover/a/avatar-gen/avatar-generations_hugw.jpg"
-            alt="profile"
-            className="profile-img"
+          {!profileImg ? (
+            <div className="default">
+              <TbCameraPlus className="default-img" />
+            </div>
+          ) : (
+            <img src={profileImg} alt="" className="profile-img" />
+          )}
+          <input
+            type="file"
+            accept="image/png,image/jpeg,image/jpg"
+            ref={imgRef}
+            hidden
+            onChange={handleProfileImgChange}
           />
-          <img src={EditIcon} alt="edit-icon" className="edit-icon" />
+          <img
+            src={EditIcon}
+            alt="edit-icon"
+            className="edit-icon"
+            onClick={() => imgRef.current.click()}
+          />
         </div>
         <div className="profile-info">
           <h2>Pranav Premanand</h2>

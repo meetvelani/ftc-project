@@ -4,6 +4,8 @@ import App from "./App";
 import { StateProvider } from "./StateProvider";
 import reducer, { initialState } from "./reducer";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '@react-pdf-viewer/core/lib/styles/index.css';
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

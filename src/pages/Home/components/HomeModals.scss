@@ -26,6 +26,8 @@
 
         .added-img {
           width: 6rem;
+          height: 6rem;
+          object-fit: cover;
           border-radius: 50%;
           border: 2px solid $color-primary;
         }
@@ -38,7 +40,7 @@
           justify-content: center;
           align-items: center;
           .default-img {
-            font-size: 5rem;
+            font-size: 4rem;
             color: $color-bg-primary;
             cursor: pointer;
           }
@@ -156,15 +158,15 @@
           outline: none;
         }
       }
-      .img-slider {
-        padding: 2rem;
+      .slider {
+        padding: 0.5rem 2rem;
         .slick-list {
           height: 15rem !important;
           .slick-track {
             height: 15rem !important;
             .slick-slide {
               height: 15rem !important;
-              .slider-img{
+              .slider-item {
                 height: 15rem !important;
                 object-fit: contain;
               }
@@ -190,8 +192,12 @@
             align-items: center;
             gap: 0.2rem;
             cursor: pointer;
-            .icon {
+            .icon-img {
               font-size: 2rem;
+            }
+            .icon {
+              font-size: 1.7rem;
+              color: purple;
             }
             span {
               font-size: 0.6rem;

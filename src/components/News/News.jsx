@@ -10,18 +10,18 @@ export const News = () => {
       news: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
       time: "15m ago",
     },
-    {
-      news: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
-      time: "15m ago",
-    },
-    {
-      news: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
-      time: "15m ago",
-    },
-    {
-      news: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
-      time: "15m ago",
-    },
+    // {
+    //   news: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
+    //   time: "15m ago",
+    // },
+    // {
+    //   news: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
+    //   time: "15m ago",
+    // },
+    // {
+    //   news: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
+    //   time: "15m ago",
+    // },
   ];
   return (
     <div className="news">
