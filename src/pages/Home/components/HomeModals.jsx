@@ -369,7 +369,7 @@ export const AddMoreDetailsModal = (props) => {
           file.type === "image/jpg"
         ) {
           let img = file;
-          return { image: URL.createObjectURL(img) };
+          return { url: URL.createObjectURL(img) };
         } else {
           return toast("Select an image file", {
             icon: "❌",
@@ -445,7 +445,6 @@ export const AddMoreDetailsModal = (props) => {
 
   // Selecting video files
   const onVideosSelect = (videoFiles) => {
-    console.log(videoFiles, "files selected");
     setImgs([]);
     setDocs([]);
     const allVideos = Object.values(videoFiles.target.files);

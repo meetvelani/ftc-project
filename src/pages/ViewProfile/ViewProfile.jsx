@@ -7,17 +7,17 @@ export const ViewProfile = () => {
   const posts = [
     {
       title: "Pranav declared Yash defaulter",
-      descr:
+      description:
         "Maecenas interdum lorem eleifend orci aliquam mollis. Aliquam non rhoncus magna. Suspendisse aliquet tincidunt enim",
     },
     {
       title: "Pranav declared Yash defaulter",
-      descr:
+      description:
         "Maecenas interdum lorem eleifend orci aliquam mollis. Aliquam non rhoncus magna. Suspendisse aliquet tincidunt enim",
     },
     {
       title: "Pranav declared Yash defaulter",
-      descr:
+      description:
         "Maecenas interdum lorem eleifend orci aliquam mollis. Aliquam non rhoncus magna. Suspendisse aliquet tincidunt enim",
     },
   ];
