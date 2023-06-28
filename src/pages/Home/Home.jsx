@@ -9,12 +9,6 @@ import { News } from "../../components/News/News";
 import ProfileImg from "../../assets/images/profile-picture.png";
 import SliderImg1 from "../../assets/images/postImg1.webp";
 import SliderImg2 from "../../assets/images/postImg2.jpg";
-import video1 from "../../assets/video1.mp4";
-import video2 from "../../assets/video2.mp4";
-import video3 from "../../assets/video3.mp4";
-import pdf1 from "../../assets/pdf1.pdf";
-import pdf2 from "../../assets/pdf2.pdf";
-import audio from "../../assets/music.mp3";
 import { Post } from "../../components/Post/Post";
 
 export const Home = () => {
@@ -37,9 +31,9 @@ export const Home = () => {
       name: "Pranav",
       description: "Good morning",
       postItems: [
-        { url: video1, type: "video" },
-        { url: video2, type: "video" },
-        { url: video3, type: "video" },
+        // { url: video1, type: "video" },
+        // { url: video2, type: "video" },
+        // { url: video3, type: "video" },
       ],
     },
     {
@@ -47,8 +41,8 @@ export const Home = () => {
       name: "Pranav",
       description: "Good morning",
       postItems: [
-        { url: pdf1, type: "document" },
-        { url: pdf2, type: "document" },
+        // { url: pdf1, type: "document" },
+        // { url: pdf2, type: "document" },
       ],
     },
     {
@@ -56,8 +50,8 @@ export const Home = () => {
       name: "Pranav",
       description: "Good morning",
       postItems: [
-        { url: audio, type: "audio" },
-        { url: audio, type: "audio" },
+        // { url: audio, type: "audio" },
+        // { url: audio, type: "audio" },
       ],
     },
   ];
