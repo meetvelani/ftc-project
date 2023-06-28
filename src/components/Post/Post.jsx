@@ -2,19 +2,28 @@ import "./Post.scss";
 import ProfileImg from "../../assets/images/profile-picture.png";
 import { SlOptions } from "react-icons/sl";
 import { useRef } from "react";
-import { MdLocationOn, MdPhone } from "react-icons/md";
+import {
+  MdFollowTheSigns,
+  MdLocationOn,
+  MdOutlineIosShare,
+  MdPhone,
+  MdSend,
+} from "react-icons/md";
 import { SiGmail } from "react-icons/si";
 import { RiSearchFill } from "react-icons/ri";
-import { FaDownload } from "react-icons/fa";
+import { FaDownload, FaRegCommentDots, FaShare } from "react-icons/fa";
 import { IoBagSharp } from "react-icons/io5";
 import { ReactComponent as AgeIcon } from "../../assets/icons/age-icon.svg";
-import { BsPersonCircle } from "react-icons/bs";
+import { BsPersonCircle, BsPeopleFill } from "react-icons/bs";
 import { useLocation } from "react-router-dom";
 import Slider from "react-slick";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useState } from "react";
 import ReactPlayer from "react-player";
 import { Viewer } from "@react-pdf-viewer/core";
+import InputEmoji from "react-input-emoji";
+import { ReplyBox } from "./components/ReplyBox";
+import { CommentBox } from "./components/CommentBox";
 
 const PDFViewer = ({ fileUrl }) => {
   const createFileUrl = (file) => {
@@ -33,9 +42,31 @@ const PDFViewer = ({ fileUrl }) => {
 export const Post = ({ post }) => {
   const { pathname } = useLocation();
   const [activeSlide, setActiveSlide] = useState(0);
+  const [newMessage, setNewMessage] = useState("");
+  const [comments, setComments] = useState([
+    { comment: "Comment show here" },
+    { comment: "hello" },
+    { comment: "hai" },
+    { comment: "hello" },
+  ]);
+
+  const [commentsShow, setCommentsShow] = useState(false);
+  const [reply, setReply] = useState(false);
+
+  const handleChange = (newMessage) => {
+    setNewMessage(newMessage);
+  };
+
+  const handleReplyShow = () => {
+    setReply(!reply);
+  };
 
   const handleSlideChange = (currentSlide, nextSlide) => {
     setActiveSlide(nextSlide);
+  };
+
+  const handleCommentsShow = () => {
+    setCommentsShow(!commentsShow);
   };
 
   const settings = {
@@ -135,6 +166,7 @@ export const Post = ({ post }) => {
                     {item.type === "video" && (
                       <div className="slider-item" key={post.url}>
                         <ReactPlayer
+                          className="video-player"
                           url={`../../assets/video1.mp4`}
                           height="100%"
                           width="100%"
@@ -160,7 +192,12 @@ export const Post = ({ post }) => {
                           controls
                           autoplay={false}
                         /> */}
-                        <audio src={post.url} controls></audio>
+                        <audio
+                          src={post.url}
+                          height="50px"
+                          width="100%"
+                          controls
+                        ></audio>
                       </div>
                     )}
                   </>
@@ -169,7 +206,66 @@ export const Post = ({ post }) => {
             </Slider>
           </div>
         )}
-        <button className="button-primary">View Post</button>
+        <div className="chases-comments-count">
+          <div className="box">
+            <span>0</span>
+            <span> Chases</span>
+          </div>
+          <div className="box">
+            <span>{comments.length}</span>
+            <span> Comments</span>
+          </div>
+        </div>
+        <hr className="divider-line" />
+        <div className="options">
+          <div>
+            <div className="item">
+              <MdFollowTheSigns className="item-icon" />
+              <span>Chase</span>
+            </div>
+            <div className="item" onClick={handleCommentsShow}>
+              <FaRegCommentDots className="item-icon" />
+              <span>Comments</span>
+            </div>
+            <div className="item">
+              <FaShare className="item-icon" />
+              <span>Share</span>
+            </div>
+            <div className="item">
+              <MdOutlineIosShare className="item-icon" />
+              <span>Send</span>
+            </div>
+          </div>
+          <div>
+            <div className="item">
+              <BsPeopleFill className="item-icon" />
+              <span>Debate</span>
+            </div>
+          </div>
+        </div>
+        <div className="comment-box">
+          <img
+            src={post.dp ? post.dp : ProfileImg}
+            alt="dp"
+            className="dp-img"
+          />
+          <div className="comment-input">
+            <InputEmoji value={newMessage} onChange={handleChange} />
+            <MdSend className="icon" />
+          </div>
+        </div>
+
+        {commentsShow && (
+          <div className="comments-div">
+            {comments.map((item) => {
+              return <CommentBox post={post} item={item} />;
+            })}
+          </div>
+        )}
+
+        {pathname !== "/" && (
+          <button className="button-primary">View Post</button>
+        )}
       </div>
     </div>
   );

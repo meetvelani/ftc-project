@@ -94,11 +94,17 @@
             font-size: 80%;
             color: $color-primary;
           }
+          @media (max-width: 650px) {
+            .person {
+              transform: translateX(-55%) translateY(-60%);
+            }
+          }
           @media (max-width: 550px) {
             .lens {
               font-size: 100%;
             }
             .person {
+              transform: translateX(-56%) translateY(-60%);
               font-size: 60%;
             }
           }
@@ -111,7 +117,7 @@
           @media (max-width: 430px) {
             font-size: 6.5rem;
             margin-top: 0;
-            .lens{
+            .lens {
               display: none;
             }
             .person {
@@ -247,7 +253,7 @@
                 font-size: 1.2rem;
               }
             }
-            @media (max-width:400px){
+            @media (max-width: 400px) {
               margin-left: -2rem;
             }
           }
@@ -287,33 +293,143 @@
         }
       }
     }
-    .slider-div{
+    .slider-div {
       width: 20rem;
-      padding:1rem 0.5rem;
-      .slider{
-        img{
+      padding: 1rem 0.5rem;
+      // @media (min-width: 1024px) {
+      //   width: 35rem;
+      // }
+      .slider {
+        img {
+          height: 15rem;
           object-fit: contain;
         }
-        .slider-item{
+        .slider-item {
           // height: 15rem;
           width: 20rem;
+          // @media (min-width: 1024px) {
+          // height: 15rem;
+          // width: 100%;
+          // }
+          // .video-player {
+          //   height: 15rem;
+          // }
         }
       }
       // .slider {
-        // .slick-list {
-        //   height: 15rem !important;
-        //   .slick-track {
-        //     height: 15rem !important;
-        //     .slick-slide {
-        //       height: 15rem !important;
-        //       .slider-item {
-        //         height: 15rem !important;
-        //         object-fit: contain;
-        //       }
-        //     }
-        //   }
-        // }
+      // .slick-list {
+      //   height: 15rem !important;
+      //   .slick-track {
+      //     height: 15rem !important;
+      //     .slick-slide {
+      //       height: 15rem !important;
+      //       .slider-item {
+      //         height: 15rem !important;
+      //         object-fit: contain;
+      //       }
+      //     }
+      //   }
       // }
+      // }
+    }
+    .chases-comments-count{
+      display: flex;
+      font-size: 0.8rem;
+      gap:0.5rem;
+      width: 100%;
+    }
+    .divider-line{
+      width: 100%;
+      background-color: $color-bg-primary;
+    }
+    .options{
+      display: flex;
+      justify-content: space-between;
+      gap:1rem;
+      width: 100%;
+      div{
+        display: flex;
+        gap:0.5rem;
+        .item{
+          display: grid;
+          grid-template-columns: 1fr;
+          gap:0.2rem;
+          padding:0.4rem 1rem;
+          border-radius: 1rem;
+          justify-items: center;
+          cursor: pointer;
+          &:hover{
+            background-color: $color-bg-primary;
+          }
+          .item-icon{
+            font-size: 1.3rem;
+            color: $color-primary;
+          }
+          span{
+            font-size: 0.7rem;
+          }
+        }
+      }
+    }
+    .dp-img{
+      border-radius: 50%;
+      width: 2.5rem;
+      height: 2.5rem;
+      object-fit: contain;
+      border: 2px solid $color-primary;
+    }
+    .comment-box{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap:0.2rem;
+      .comment-input{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        .icon{
+          color:$color-primary;
+          font-size: 1.5rem;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .comments-div{
+      display: grid;
+      width: 100%;
+      grid-template-columns: 1fr;
+      gap:1rem;
+      .comment{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        width: 100%;
+        .comment-details{
+          display: flex;
+          gap:0.2rem;
+          width: 100%;
+          div{
+            background-color: $color-bg-primary;
+            border-radius: 1rem;
+            padding:0.5rem;
+            width: 100%;
+            span{
+              font-size: 0.9rem;
+              font-weight: 600;
+            }
+            p{
+              font-size: 0.8rem;
+            }
+          }
+        }
+        span{
+          font-size: 0.8rem;
+          color: $color-primary;
+          margin-right: 1rem;
+          cursor: pointer;
+        }
+      }
     }
   }
 }
