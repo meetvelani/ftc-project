@@ -24,6 +24,7 @@ import { Viewer } from "@react-pdf-viewer/core";
 import InputEmoji from "react-input-emoji";
 import { ReplyBox } from "./components/ReplyBox";
 import { CommentBox } from "./components/CommentBox";
+import defaulterImg from '../../assets/images/defaulter-avatar.png'
 
 const PDFViewer = ({ fileUrl }) => {
   const createFileUrl = (file) => {
@@ -102,8 +103,9 @@ export const Post = ({ post }) => {
           <div className="left-side-card">
             <span>Defaulter</span>
             <div className="lens-div">
-              <RiSearchFill className="lens" />
-              <BsPersonCircle className="person" />
+              <img src={defaulterImg} alt="defaulter-image" />
+              {/* <RiSearchFill className="lens" />
+              <BsPersonCircle className="person" /> */}
             </div>
             {/* <div class="circle-container">
               <div class="outer-circle">

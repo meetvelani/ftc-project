@@ -11,8 +11,9 @@
   }
   .inner-box {
     display: grid;
-    grid-template-columns: 25vw 40vw 20vw;
+    grid-template-columns: 25vw 40vw 25vw;
     gap: 1rem;
+    justify-content: center;
     @media (max-width: 1060px) {
       grid-template-columns: 30vw auto;
     }
@@ -25,13 +26,35 @@
     }
 
     @media (min-width: 1060px) {
-      .posts,
-      .news {
+      .posts{
         height: calc((88vh - 4rem)) !important;
         overflow-y: scroll;
         scroll-behavior: smooth;
         &::-webkit-scrollbar {
           display: none;
+        }
+      }
+      .news {
+        min-height: fit-content;
+        max-height: calc((88vh - 4rem)) !important;
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+    }
+    .posts{
+      // 1380
+      .card-item{
+        .left-side-card{
+          .lens-div{
+            // margin-top: 2rem;
+            // img{
+            //   @media(max-width:1350px){
+            //   }
+            // }
+          }
         }
       }
     }

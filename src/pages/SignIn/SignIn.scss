@@ -63,12 +63,13 @@
           cursor: pointer;
         }
         .sign-in-btn {
-          background-color: $color-bg-primary;
+          background-color: $color-bg-primary-dark;
           color: $color-primary;
           @include buttonStyles();
           padding-block: 1rem;
           &:hover{
-            background-color: $color-bg-primary-dark;
+            background-color: #bbbbbb;
+            box-shadow: 1px 1px 0.3rem rgba(0, 0, 0, 0.2);
           }
           @media (max-width: 450px) {
             color: #fff;

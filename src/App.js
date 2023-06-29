@@ -11,6 +11,8 @@ import { Messaging } from "./pages/Messaging/Messaging";
 import { Home } from "./pages/Home/Home";
 import { Toaster } from "react-hot-toast";
 import { Worker } from "@react-pdf-viewer/core";
+import { Chat } from "./pages/Chat/Chat";
+import { Notifications } from "./pages/Notifications/Notifications";
 
 function App() {
   return (
@@ -33,7 +35,7 @@ function App() {
               path="/sign-in"
               element={
                 <>
-                  <Navbar />
+                  <Navbar userLog={false} />
                   <SignIn />
                 </>
               }
@@ -42,7 +44,7 @@ function App() {
               path="/sign-up"
               element={
                 <>
-                  <Navbar />
+                  <Navbar userLog={false} />
                   <SignUp />
                 </>
               }
@@ -83,6 +85,26 @@ function App() {
                 <>
                   <Navbar />
                   <Messaging />
+                  <MobileViewOptions />
+                </>
+              }
+            />
+            <Route
+              path="/chat"
+              element={
+                <>
+                  <Navbar />
+                  <Chat />
+                  <MobileViewOptions />
+                </>
+              }
+            />
+            <Route
+              path="/notifications"
+              element={
+                <>
+                  <Navbar />
+                  <Notifications />
                   <MobileViewOptions />
                 </>
               }

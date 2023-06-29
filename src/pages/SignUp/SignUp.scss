@@ -56,46 +56,85 @@
             font-size: 0.9rem;
             background-color: $color-bg-primary;
           }
+          .sm-screen-view {
+            display: none;
+            @media (max-width: 476px) {
+              display: block;
+            }
+          }
         }
         .gender-and-dob {
           display: flex;
           gap: 0.5rem;
-          .genders {
+          .gender-box {
             display: flex;
-            gap: 0.5rem;
-            .selected {
-              background-color: $color-primary !important;
-              color: #fff !important;
+            flex-direction: column;
+            gap: 0.2rem;
+            .genders {
+              display: flex;
+              gap: 0.5rem;
+              .selected {
+                background-color: $color-primary !important;
+                color: #fff !important;
+              }
             }
-          }
-          .genders > .gender,
-          .dob {
-            padding: 0.5rem;
-            height: 2.5rem;
-            border-radius: 1rem;
-            font-size: 0.9rem;
-            background-color: $color-bg-primary;
-            color: #727272;
-            border: 1px solid #cccccc;
-            input {
+            .genders > .gender {
+              padding: 0.5rem;
+              height: 2.5rem;
+              border-radius: 1rem;
+              font-size: 0.9rem;
+              background-color: $color-bg-primary;
               color: #727272;
-              //   cursor: pointer;
-              background-color: $color-bg-primary !important;
-              outline: none;
-              border: none;
+              border: 1px solid #cccccc;
+              input {
+                color: #727272;
+                //   cursor: pointer;
+                background-color: $color-bg-primary !important;
+                outline: none;
+                border: none;
+              }
+            }
+            .genders > .gender {
+              cursor: pointer;
             }
           }
-          .genders > .gender {
-            cursor: pointer;
+          .dob-div {
+            .dob {
+              padding: 0.5rem;
+              height: 2.5rem;
+              border-radius: 1rem;
+              font-size: 0.9rem;
+              background-color: $color-bg-primary;
+              color: #727272;
+              border: 1px solid #cccccc;
+              input {
+                color: #727272;
+                //   cursor: pointer;
+                background-color: $color-bg-primary !important;
+                outline: none;
+                border: none;
+              }
+            }
           }
         }
-        .pincode-city-state {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 0.5rem;
-          @media (max-width: 476px) {
-            grid-template-columns: 1fr;
-            gap: 1rem;
+        .pincode-div {
+          display: flex;
+          flex-direction: column;
+          gap: 0.2rem;
+          .pincode-city-state {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            @media (max-width: 476px) {
+              grid-template-columns: 1fr;
+              gap: 1rem;
+            }
+          }
+          .lg-screen-view {
+            display: block;
+            @media (max-width: 476px) {
+              display: none;
+            }
           }
         }
         .button-primary {

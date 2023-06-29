@@ -1,0 +1,69 @@
+@import "../../App.scss";
+
+.notifications-container {
+  padding: 3rem 0;
+  min-height: calc(88vh - 6rem);
+  .inner-container {
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 60vw 25vw;
+    gap: 2rem;
+    justify-content: center;
+    @media (max-width: 1060px) {
+      grid-template-columns: 1fr;
+    }
+    .notifications {
+      border-radius: 1rem;
+      background-color: #fff;
+      .header {
+        padding: 1rem 2rem;
+        width: 100%;
+        border-bottom: 2px solid $color-bg-primary;
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        .icon {
+          font-size: 2rem;
+          color: $color-primary;
+        }
+        span {
+          font-size: 1.3rem;
+          font-weight: 600;
+        }
+      }
+
+      .notifications-list {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        padding: 1rem;
+        .list-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.5rem;
+          border-radius: 1rem;
+          padding: 0.6rem;
+          background-color: #eef3f8;
+          .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: $color-primary;
+            margin-top: 0.4rem;
+          }
+          .details {
+            display: flex;
+            flex-direction: column;
+            span {
+              font-size: 0.9rem;
+            }
+            small {
+              font-size: 0.7rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}

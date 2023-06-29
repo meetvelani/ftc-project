@@ -9,11 +9,11 @@ import "./Navbar.scss";
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-export const Navbar = () => {
+export const Navbar = ({ userLog }) => {
   const { pathname } = useLocation();
   const [profileImg, setProfileImg] = useState(true);
   const [userLoggedIn, setUserLoggedIn] = useState(
-    pathname !== "/sign-in" || "/sign-up" ? true : false
+    userLog === false ? userLog : true
   );
   const navigate = useNavigate();
   return (
@@ -34,7 +34,7 @@ export const Navbar = () => {
           )}
         </div>
         <div className="navbar-options">
-          {userLoggedIn ? (
+          {userLoggedIn && (
             <>
               <div className={`icon-box ${pathname === "/" && "active"}`}>
                 <Link to={"/"} className="underline-none">
@@ -89,11 +89,13 @@ export const Navbar = () => {
                 </Link>
               </div>
             </>
-          ) : pathname === "/sign-in" ? (
+          )}
+          {!userLoggedIn && pathname === "/sign-in" && (
             <Link to={"/sign-up"}>
               <button className="button-primary">Sign Up</button>
             </Link>
-          ) : (
+          )}
+          {!userLoggedIn && pathname === "/sign-up" && (
             <Link to={"/sign-in"}>
               <button className="button-primary">Sign In</button>
             </Link>
