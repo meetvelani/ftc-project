@@ -5,9 +5,11 @@ import LinkedInIcon from "../../assets/images/linkedin.png";
 import FacebookIcon from "../../assets/images/facebook.png";
 import TwitterIcon from "../../assets/images/twitter.png";
 import BgImage from "../../assets/images/sign-in-image.png";
+import { useNavigate } from "react-router-dom";
 
 export const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
   return (
     <div className="sign-in-container">
       <div className="inner-div">
@@ -32,7 +34,7 @@ export const SignIn = () => {
               <span>Show password</span>
             </div>
             <span className="forgot-password-text">Forgot password?</span>
-            <button className="sign-in-btn">Sign in</button>
+            <button className="sign-in-btn" onClick={()=>navigate('/')}>Sign in</button>
           </form>
           <span className="or">OR</span>
           <div className="social-media-icons">

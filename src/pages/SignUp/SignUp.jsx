@@ -4,7 +4,7 @@ import GoogleIcon from "../../assets/images/google.png";
 import FacebookIcon from "../../assets/images/facebook.png";
 import BgImage from "../../assets/images/sign-up-image.png";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { TiTick, TiTimes } from "react-icons/ti";
@@ -24,6 +24,7 @@ export const SignUp = () => {
   const [passSpecialChars, setPassSetSpecialChars] = useState(true);
   const [passMinLength, setPassMinLength] = useState(true);
   const [passMaxLength, setPassMaxLength] = useState(true);
+  const navigate = useNavigate();
 
   const validatePassword = (password) => {
     setPassword(password);
@@ -118,6 +119,7 @@ export const SignUp = () => {
   // Do signup
   const doSignup = (values) => {
     console.log(values, "VALUES");
+    navigate("/");
   };
 
   const checkPincode = async (e) => {
