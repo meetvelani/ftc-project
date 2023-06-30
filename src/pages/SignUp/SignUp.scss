@@ -4,6 +4,7 @@
   padding: 2rem 0 0 0;
   min-height: 88vh;
   position: relative;
+  background-color: #fff;
   .inner-div {
     width: 90%;
     height: 100%;
@@ -176,15 +177,24 @@
         bottom: 1px;
         right: 1px;
         width: 32rem;
-        z-index: -1;
-        @media (max-width: 1111px) {
+        z-index: 1;
+        @media (max-width: 1156px) {
           width: 25rem;
         }
         @media (max-width: 990px) {
           width: 20rem;
         }
-        @media (max-width: 845px) {
+        @media (max-width: 896px) {
           width: 16rem;
+        }
+        @media (max-width: 840px) {
+          width: 13rem;
+        }
+        @media (max-width: 786px) {
+          width: 11rem;
+        }
+        @media (max-width: 750px) {
+          width: 9rem;
         }
       }
     }

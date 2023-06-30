@@ -15,23 +15,23 @@ export const MobileViewOptions = () => {
             <FaHome className="icon" />
           </div>
         </Link>
-        <Link>
-          <div className={`icon-box ${pathname === "/" && "active"}`}>
+        <Link to={"/messaging"}>
+          <div className={`icon-box ${pathname === "/messaging" && "active"}`}>
             <MdChat className="icon" />
           </div>
         </Link>
-        <Link>
-          <div className={`icon-box ${pathname === "/" && "active"}`}>
+        <Link to={'/'}>
+          <div className={`icon-box ${pathname === "/add" && "active"}`}>
             <AiFillPlusSquare className="icon" />
           </div>
         </Link>
-        <Link>
-          <div className={`icon-box ${pathname === "/" && "active"}`}>
+        <Link to={'/notifications'}>
+          <div className={`icon-box ${pathname === "/notifications" && "active"}`}>
             <TbBellFilled className="icon" />
           </div>
         </Link>
-        <Link>
-          <div className={`icon-box ${pathname === "/" && "active"}`}>
+        <Link to={'/'}>
+          <div className={`icon-box ${pathname === "/news" && "active"}`}>
             <FaNewspaper className="icon" />
           </div>
         </Link>

@@ -9,12 +9,10 @@ import "./Navbar.scss";
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-export const Navbar = ({ userLog }) => {
+export const Navbar = () => {
   const { pathname } = useLocation();
   const [profileImg, setProfileImg] = useState(true);
-  const [userLoggedIn, setUserLoggedIn] = useState(
-    userLog === false ? userLog : true
-  );
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
   const navigate = useNavigate();
   return (
     <div className="navbar">
@@ -26,7 +24,7 @@ export const Navbar = ({ userLog }) => {
               <img src={LogoImg} alt="logo" className="logo-img" />
             </div>
           </Link>
-          {userLoggedIn && (
+          {pathname !== "/sign-up" && pathname !== "/sign-in" && (
             <div className="search-box">
               <BiSearch className="search-icon" />
               <input type="text" placeholder="Search" />
@@ -34,7 +32,7 @@ export const Navbar = ({ userLog }) => {
           )}
         </div>
         <div className="navbar-options">
-          {userLoggedIn && (
+          {pathname !== "/sign-up" && pathname !== "/sign-in" && (
             <>
               <div className={`icon-box ${pathname === "/" && "active"}`}>
                 <Link to={"/"} className="underline-none">
@@ -90,12 +88,12 @@ export const Navbar = ({ userLog }) => {
               </div>
             </>
           )}
-          {!userLoggedIn && pathname === "/sign-in" && (
+          {pathname === "/sign-in" && (
             <Link to={"/sign-up"}>
               <button className="button-primary">Sign Up</button>
             </Link>
           )}
-          {!userLoggedIn && pathname === "/sign-up" && (
+          {pathname === "/sign-up" && (
             <Link to={"/sign-in"}>
               <button className="button-primary">Sign In</button>
             </Link>

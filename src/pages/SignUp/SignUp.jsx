@@ -24,9 +24,11 @@ export const SignUp = () => {
   const [passSpecialChars, setPassSetSpecialChars] = useState(true);
   const [passMinLength, setPassMinLength] = useState(true);
   const [passMaxLength, setPassMaxLength] = useState(true);
+  const [initialPwValidationMsgs, setInitialPwValidationMsgs] = useState(false);
   const navigate = useNavigate();
 
   const validatePassword = (password) => {
+    setInitialPwValidationMsgs(true);
     setPassword(password);
     if (password !== "") {
       setPasswordErr("");
@@ -267,34 +269,39 @@ export const SignUp = () => {
               />
               <small className="error">{passwordErr}</small>
               {/* <small className="error">{errors.password?.message}</small> */}
-              <small className={passMinLength ? "error" : "success"}>
-                {!passMinLength ? <TiTick /> : <TiTimes />} Must have at least 6
-                characters
-              </small>
+              {initialPwValidationMsgs && (
+                <>
+                  <small className={passMinLength ? "error" : "success"}>
+                    {!passMinLength ? <TiTick /> : <TiTimes />} Must have at
+                    least 6 characters
+                  </small>
 
-              <small className={passMaxLength ? "error" : "success"}>
-                {!passMaxLength ? <TiTick /> : <TiTimes />} Must be below 16
-                characters
-              </small>
+                  <small className={passMaxLength ? "error" : "success"}>
+                    {!passMaxLength ? <TiTick /> : <TiTimes />} Must be below 16
+                    characters
+                  </small>
 
-              <small className={passLowercase ? "error" : "success"}>
-                {!passLowercase ? <TiTick /> : <TiTimes />} Must contain
-                lowercase
-              </small>
+                  <small className={passLowercase ? "error" : "success"}>
+                    {!passLowercase ? <TiTick /> : <TiTimes />} Must contain
+                    lowercase
+                  </small>
 
-              <small className={passUppercase ? "error" : "success"}>
-                {!passUppercase ? <TiTick /> : <TiTimes />} Must contain
-                uppercase
-              </small>
+                  <small className={passUppercase ? "error" : "success"}>
+                    {!passUppercase ? <TiTick /> : <TiTimes />} Must contain
+                    uppercase
+                  </small>
 
-              <small className={passSpecialChars ? "error" : "success"}>
-                {!passSpecialChars ? <TiTick /> : <TiTimes />} Must contain
-                special characters
-              </small>
+                  <small className={passSpecialChars ? "error" : "success"}>
+                    {!passSpecialChars ? <TiTick /> : <TiTimes />} Must contain
+                    special characters
+                  </small>
 
-              <small className={passNumbers ? "error" : "success"}>
-                {!passNumbers ? <TiTick /> : <TiTimes />} Must contain numbers
-              </small>
+                  <small className={passNumbers ? "error" : "success"}>
+                    {!passNumbers ? <TiTick /> : <TiTimes />} Must contain
+                    numbers
+                  </small>
+                </>
+              )}
             </div>
             <div className="input-box">
               <input

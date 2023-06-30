@@ -10,11 +10,16 @@ import { useNavigate } from "react-router-dom";
 export const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+
+  const doSignin = (e) => {
+    e.preventDefault()
+    navigate("/");
+  };
   return (
     <div className="sign-in-container">
       <div className="inner-div">
         <div className="form-side">
-          <form action="">
+          <form onSubmit={doSignin}>
             <h1>Sign in</h1>
             <div className="input-box">
               <input type="email" placeholder="Enter your email" />
@@ -34,7 +39,7 @@ export const SignIn = () => {
               <span>Show password</span>
             </div>
             <span className="forgot-password-text">Forgot password?</span>
-            <button className="sign-in-btn" onClick={()=>navigate('/')}>Sign in</button>
+            <button type="submit" className="sign-in-btn">Sign in</button>
           </form>
           <span className="or">OR</span>
           <div className="social-media-icons">

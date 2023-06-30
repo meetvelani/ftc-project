@@ -11,6 +11,7 @@ import { SlCalender } from "react-icons/sl";
 import EditIcon from "../../assets/images/edit-pic-icon.png";
 import { useState } from "react";
 import { useEffect } from "react";
+import { toast } from "react-hot-toast";
 
 export const EditProfile = () => {
   const [today, setToday] = useState();
@@ -32,9 +33,14 @@ export const EditProfile = () => {
     const todayDate = `${year}-${month}-${day}`;
     setToday(todayDate);
   }, []);
+
+  const updateProfile = (e)=>{
+    e.preventDefault()
+    toast.success('Profile updated')
+  }
   return (
     <div className="edit-profile">
-      <form className="inner-div">
+      <form className="inner-div" onSubmit={updateProfile}>
         <div className="image-section">
           <div className="image">
             <img
@@ -44,7 +50,7 @@ export const EditProfile = () => {
             />
             <img src={EditIcon} alt="edit-icon" className="edit-icon" />
           </div>
-          <button className="button-primary">Update Profile</button>
+          <button className="button-primary" type="submit">Update Profile</button>
         </div>
         <div className="form">
           <div className="input-box">

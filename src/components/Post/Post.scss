@@ -6,6 +6,7 @@
   padding: 1rem;
   margin-bottom: 1rem;
   width: 100%;
+  position: relative;
   @media (max-width: 450px) {
     padding: 0.5rem;
   }
@@ -38,6 +39,22 @@
       font-size: 1.3rem;
       color: $color-primary;
       cursor: pointer;
+    }
+    .options-dropdown {
+      position: absolute;
+      right: 1rem;
+      top: 2.5rem;
+      z-index: 5;
+      padding: 1rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      width: fit-content;
+      border-radius: 1rem;
+      box-shadow: 1px 1px 0.5rem rgba(0, 0, 0, 0.2);
+      span {
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
     }
   }
   .post-details {
@@ -235,7 +252,6 @@
           padding: 0.3rem 1rem;
           cursor: pointer;
           font-size: 0.8rem;
-
         }
       }
 
@@ -418,7 +434,7 @@
         align-items: center;
         .icon {
           color: $color-primary;
-          font-size: 1.5rem;
+          font-size: 1.8rem;
           cursor: pointer;
         }
       }

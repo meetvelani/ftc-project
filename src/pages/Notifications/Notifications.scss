@@ -3,6 +3,9 @@
 .notifications-container {
   padding: 3rem 0;
   min-height: calc(88vh - 6rem);
+  @media (max-width: 1060px) {
+    padding-bottom: 5rem;
+  }
   .inner-container {
     width: 90%;
     margin: 0 auto;
@@ -61,6 +64,26 @@
             small {
               font-size: 0.7rem;
             }
+          }
+        }
+      }
+      .empty-page {
+        .image {
+          display: grid;
+          grid-template-columns: 1fr;
+          justify-content: center;
+          padding: 2rem;
+          position: relative;
+          justify-items: center;
+          // text-align: center;
+          // h4 {
+          //   position: absolute;
+          //   left: 50%;
+          //   top: 10%;
+          //   transform: translateX(-50%);
+          // }
+          img {
+            width: 50% !important;
           }
         }
       }

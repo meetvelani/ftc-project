@@ -6,6 +6,7 @@ import {
   MdFollowTheSigns,
   MdLocationOn,
   MdOutlineIosShare,
+  MdOutlineTaskAlt,
   MdPhone,
   MdSend,
 } from "react-icons/md";
@@ -24,7 +25,7 @@ import { Viewer } from "@react-pdf-viewer/core";
 import InputEmoji from "react-input-emoji";
 import { ReplyBox } from "./components/ReplyBox";
 import { CommentBox } from "./components/CommentBox";
-import defaulterImg from '../../assets/images/defaulter-avatar.png'
+import defaulterImg from "../../assets/images/defaulter-avatar.png";
 
 const PDFViewer = ({ fileUrl }) => {
   const createFileUrl = (file) => {
@@ -44,6 +45,7 @@ export const Post = ({ post }) => {
   const { pathname } = useLocation();
   const [activeSlide, setActiveSlide] = useState(0);
   const [newMessage, setNewMessage] = useState("");
+  const [showDropdown, setShowDropdown] = useState(false);
   const [comments, setComments] = useState([
     { comment: "Comment show here" },
     { comment: "hello" },
@@ -52,14 +54,14 @@ export const Post = ({ post }) => {
   ]);
 
   const [commentsShow, setCommentsShow] = useState(false);
-  const [reply, setReply] = useState(false);
+  const [chaseStatus, setChaseStatus] = useState(false);
+
+  const handleChaseClick = () => {
+    setChaseStatus(!chaseStatus);
+  };
 
   const handleChange = (newMessage) => {
     setNewMessage(newMessage);
-  };
-
-  const handleReplyShow = () => {
-    setReply(!reply);
   };
 
   const handleSlideChange = (currentSlide, nextSlide) => {
@@ -81,6 +83,9 @@ export const Post = ({ post }) => {
     beforeChange: handleSlideChange,
   };
 
+  const handleShowDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
   return (
     <div className="post">
       <div className="head">
@@ -91,7 +96,12 @@ export const Post = ({ post }) => {
             <span>8h ago</span>
           </div>
         </div>
-        <SlOptions className="icon" />
+        {showDropdown && (
+          <div className="options-dropdown">
+            <span>Delete post</span>
+          </div>
+        )}
+        <SlOptions className="icon" onClick={handleShowDropdown} />
       </div>
       <div className="post-details">
         <div className="description">
@@ -221,9 +231,18 @@ export const Post = ({ post }) => {
         <hr className="divider-line" />
         <div className="options">
           <div>
-            <div className="item">
-              <MdFollowTheSigns className="item-icon" />
-              <span>Chase</span>
+            <div className="item" onClick={handleChaseClick}>
+              {chaseStatus ? (
+                <>
+                  <MdFollowTheSigns className="item-icon" />
+                  <span>Chase</span>
+                </>
+              ) : (
+                <>
+                  <MdOutlineTaskAlt className="item-icon" />
+                  <span>Chasing</span>
+                </>
+              )}
             </div>
             <div className="item" onClick={handleCommentsShow}>
               <FaRegCommentDots className="item-icon" />

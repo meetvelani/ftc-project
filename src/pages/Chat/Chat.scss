@@ -15,15 +15,15 @@
     @media (max-width: 1060px) {
       gap: 0;
       grid-template-columns: 1fr;
-      padding-bottom: 3rem;
+      padding-bottom: 5rem;
     }
     @media (min-width: 1060px) {
       min-height: calc((88vh - 4rem)) !important;
-    //   overflow-y: scroll;
-    //   scroll-behavior: smooth;
-    //   &::-webkit-scrollbar {
-    //     display: none;
-    //   }
+      //   overflow-y: scroll;
+      //   scroll-behavior: smooth;
+      //   &::-webkit-scrollbar {
+      //     display: none;
+      //   }
     }
     .chat-side {
       display: flex;
@@ -241,7 +241,7 @@
             border-top: 1px solid $color-bg-primary;
             background-color: #fff;
             .icon {
-              font-size: 1.5rem;
+              font-size: 1.8rem;
               color: $color-primary;
             }
           }

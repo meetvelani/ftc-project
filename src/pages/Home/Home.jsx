@@ -10,6 +10,7 @@ import ProfileImg from "../../assets/images/profile-picture.png";
 import SliderImg1 from "../../assets/images/postImg1.webp";
 import SliderImg2 from "../../assets/images/postImg2.jpg";
 import { Post } from "../../components/Post/Post";
+import { toast } from "react-hot-toast";
 
 export const Home = () => {
   const [showFormModal, setShowFormModal] = useState(false);
@@ -55,6 +56,10 @@ export const Home = () => {
       ],
     },
   ];
+
+  const uploadPost = ()=>{
+    toast.success('Post uploaded')
+  }
   return (
     <div className="home-container">
       <div className="posts-section">
@@ -93,6 +98,7 @@ export const Home = () => {
             onPost={() => {
               setShowConfirmationModal(false);
               setShowAddMoreModal(false);
+              uploadPost()
             }}
           />
           {posts.length === 0 && (

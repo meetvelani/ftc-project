@@ -28,7 +28,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      @media (max-width:600px){
+      @media (max-width: 600px) {
         justify-content: center;
       }
       .image {
@@ -96,6 +96,9 @@
             width: 100%;
             &:disabled {
               background-color: $color-bg-primary;
+            }
+            &:focus {
+              background-color: #fff !important;
             }
           }
           .edit-icon {

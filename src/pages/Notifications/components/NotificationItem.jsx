@@ -1,10 +1,10 @@
-export const NotificationItem = () => {
+export const NotificationItem = ({ data }) => {
   return (
     <div className="list-item">
       <span className="dot"></span>
       <div className="details">
-        <span className="title">Pranav chased on post Id 001</span>
-        <small>June 24, 2023, 8:00 pm</small>
+        <span className="title">{data.title}</span>
+        <small>{data.date}</small>
       </div>
     </div>
   );

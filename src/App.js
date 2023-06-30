@@ -35,7 +35,7 @@ function App() {
               path="/sign-in"
               element={
                 <>
-                  <Navbar userLog={false} />
+                  <Navbar />
                   <SignIn />
                 </>
               }
@@ -44,7 +44,7 @@ function App() {
               path="/sign-up"
               element={
                 <>
-                  <Navbar userLog={false} />
+                  <Navbar />
                   <SignUp />
                 </>
               }

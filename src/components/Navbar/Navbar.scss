@@ -57,6 +57,9 @@
           border: none !important;
           width: 100%;
           padding-block: 0.2rem;
+          &:focus{
+            background-color: #fff !important;
+          }
         }
       }
     }

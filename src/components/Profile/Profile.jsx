@@ -4,7 +4,7 @@ import { RiFile3Fill } from "react-icons/ri";
 import ProfileImg from "../../assets/images/profile-picture.png";
 import CoinImg from "../../assets/images/coins.png";
 import EditIcon from "../../assets/images/edit-pic-icon.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Profile.scss";
 import { toast } from "react-hot-toast";
 import { useRef } from "react";
@@ -14,10 +14,12 @@ import { TbCameraPlus } from "react-icons/tb";
 export const Profile = () => {
   const imgRef = useRef();
   const [profileImg, setProfileImg] = useState("");
+  const navigate = useNavigate();
 
   const handleProfileImgChange = (e) => {
     if (
       e.target.files[0].type === "image/x-png" ||
+      e.target.files[0].type === "image/png" ||
       e.target.files[0].type === "image/jpeg" ||
       e.target.files[0].type === "image/jpg"
     ) {
@@ -82,7 +84,9 @@ export const Profile = () => {
             <img src={CoinImg} className="icon" alt="coin" />
             <span className="total-coins">1200</span>
           </div>
-          <button className="button-primary">Buy more</button>
+          <button className="button-primary" onClick={() => navigate("/shop")}>
+            Buy more
+          </button>
         </div>
         <div className="saved-posts">
           <div className="combined-box">

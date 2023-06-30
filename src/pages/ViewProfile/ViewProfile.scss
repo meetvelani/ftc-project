@@ -4,10 +4,7 @@
   padding: 2rem 4rem 2rem 4rem;
   background-color: $color-bg-primary;
   @media (max-width: 1080px) {
-    padding: 1.7rem 4rem 1.7rem 4rem;
-  }
-  @media (max-width: 1060px) {
-    padding-bottom: 6rem !important;
+    padding: 2rem 4rem 5rem 4rem !important;
   }
   .inner-box {
     display: grid;

@@ -365,6 +365,7 @@ export const AddMoreDetailsModal = (props) => {
       const images = allPhotos.map((file) => {
         if (
           file.type === "image/x-png" ||
+          file.type === "image/png" ||
           file.type === "image/jpeg" ||
           file.type === "image/jpg"
         ) {
@@ -529,8 +530,8 @@ export const AddMoreDetailsModal = (props) => {
                 <Slider {...settings} className="slider">
                   {imgs.map((img) => (
                     <img
-                      src={img.image}
-                      key={img.image}
+                      src={img.url}
+                      key={img.url}
                       alt="image"
                       className="slider-item"
                     />
@@ -600,7 +601,7 @@ export const AddMoreDetailsModal = (props) => {
                   type="file"
                   ref={photoRef}
                   multiple
-                  accept="image/x-png,image/jpeg,image/jpg"
+                  accept="image/x-png,image/jpeg,image/jpg,image/png"
                   onChange={(e) => onImageSelect(e)}
                   hidden
                 />
