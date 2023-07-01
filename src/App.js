@@ -13,6 +13,7 @@ import { Toaster } from "react-hot-toast";
 import { Worker } from "@react-pdf-viewer/core";
 import { Chat } from "./pages/Chat/Chat";
 import { Notifications } from "./pages/Notifications/Notifications";
+import { AdvanceSearch } from "./pages/AdvanceSearch/AdvanceSearch";
 
 function App() {
   return (
@@ -105,6 +106,16 @@ function App() {
                 <>
                   <Navbar />
                   <Notifications />
+                  <MobileViewOptions />
+                </>
+              }
+            />
+            <Route
+              path="/advance-search"
+              element={
+                <>
+                  <Navbar />
+                  <AdvanceSearch />
                   <MobileViewOptions />
                 </>
               }
