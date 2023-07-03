@@ -2,8 +2,12 @@ import axios from "axios";
 import { domainName, api } from "./Constants";
 import { request } from "./utils/axios-utils";
 
-// ********* demo  **********
+// sign up
+export const signup = async (data) => {
+  return axios.post(`${domainName}${api.signup}`, data);
+};
 
-export async function signup(data) {
-  return axios.post({ url: `${domainName}${api.signup}`, body: data });
+// sign in
+export const signin = async(data)=>{
+  return axios.post(`${domainName}${api.signin}`,data)
 }

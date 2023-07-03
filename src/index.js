@@ -3,15 +3,20 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { StateProvider } from "./StateProvider";
 import reducer, { initialState } from "./reducer";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '@react-pdf-viewer/core/lib/styles/index.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "@react-pdf-viewer/core/lib/styles/index.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-
+const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <StateProvider initialState={initialState} reducer={reducer}>
-      <App />
-    </StateProvider>
+    <QueryClientProvider client={queryClient}>
+      <StateProvider initialState={initialState} reducer={reducer}>
+        <App />
+      </StateProvider>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   </React.StrictMode>
 );

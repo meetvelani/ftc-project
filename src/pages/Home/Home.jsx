@@ -108,8 +108,8 @@ export const Home = () => {
           )}
         </div>
         <div className="posts">
-          {posts.map((post) => {
-            return <Post post={post} />;
+          {posts.map((post,index) => {
+            return <Post post={post} key={index}/>;
           })}
         </div>
       </div>

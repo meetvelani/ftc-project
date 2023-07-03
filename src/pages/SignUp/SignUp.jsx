@@ -8,11 +8,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { TiTick, TiTimes } from "react-icons/ti";
+import { useMutation } from "@tanstack/react-query";
+import { signup } from "../../apiCall";
+import { toast } from "react-hot-toast";
 
 export const SignUp = () => {
   const [today, setToday] = useState();
   const [gender, setGender] = useState("");
   const [genderErr, setGenderErr] = useState("");
+  const [pincode, setPincode] = useState("");
   const [pincodeErr, setPincodeErr] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
@@ -27,6 +31,7 @@ export const SignUp = () => {
   const [initialPwValidationMsgs, setInitialPwValidationMsgs] = useState(false);
   const navigate = useNavigate();
 
+  // Validate password
   const validatePassword = (password) => {
     setInitialPwValidationMsgs(true);
     setPassword(password);
@@ -79,9 +84,6 @@ export const SignUp = () => {
 
   const {
     register,
-    reset,
-    getValues,
-    watch,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -92,9 +94,8 @@ export const SignUp = () => {
       email: "",
       phone_number: "",
       date_of_birth: "",
-      pincode: "",
+      // pincode: "",
       password: "",
-      confirm_password: "",
     },
   });
 
@@ -108,8 +109,8 @@ export const SignUp = () => {
     }
   };
 
+  // Get current date
   useEffect(() => {
-    // Get current date
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = String(currentDate.getMonth() + 1).padStart(2, "0");
@@ -118,10 +119,43 @@ export const SignUp = () => {
     setToday(todayDate);
   }, []);
 
+  const signupMutation = useMutation({
+    mutationFn: signup,
+    onSuccess: (data) => {
+      // console.log("DATA!!!!!", data.data);
+
+      if (!data.data?.access_token) {
+        return toast.error(data.data?.status[0]?.Message);
+      }
+      toast.success("Signup successful");
+      sessionStorage.setItem("token", data.data?.access_token);
+      sessionStorage.setItem("refresh_token", data.data?.refresh_token);
+      navigate("/");
+    },
+    onError: (err) => {
+      // console.log(err, "Error");
+      if (err.message) {
+        return toast.error(err.message);
+      }
+      return toast.error("Something went wrong");
+    },
+  });
+
   // Do signup
   const doSignup = (values) => {
-    console.log(values, "VALUES");
-    navigate("/");
+    values = {
+      ...values,
+      phone_number: parseInt(values.phone_number),
+      gender: gender,
+      city: city,
+      state: state,
+      pincode: parseInt(pincode),
+      region: "",
+      is_google_login: false,
+      coin: 0,
+    };
+    // console.log(values, "VALUES");
+    signupMutation.mutate(values);
   };
 
   const checkPincode = async (e) => {
@@ -141,6 +175,7 @@ export const SignUp = () => {
           `https://api.postalpincode.in/pincode/${e.target.value}`
         );
         if (response.data[0].Status === "Success") {
+          setPincode(e.target.value);
           setCity(response.data[0].PostOffice[0].Name);
           setState(response.data[0].PostOffice[0].State);
           setPincodeErr("");
@@ -262,6 +297,21 @@ export const SignUp = () => {
             </div>
             <div className="input-box">
               <input
+                type="text"
+                placeholder="Phone number"
+                name="phone_number"
+                {...register("phone_number", {
+                  required: "Phone number is required",
+                  pattern: {
+                    value: /^(\+91|\+91\-|0)?[456789]\d{9}$/,
+                    message: "Entered Phone number is not valid",
+                  },
+                })}
+              />
+              <small className="error">{errors.phone_number?.message}</small>
+            </div>
+            <div className="input-box">
+              <input
                 type="password"
                 onChange={(e) => validatePassword(e.target.value)}
                 placeholder="Password"
@@ -307,8 +357,8 @@ export const SignUp = () => {
               <input
                 type="password"
                 placeholder="Confirm password"
-                name="confirm_password"
-                {...register("confirm_password", {
+                name="password"
+                {...register("password", {
                   required: "Confirm password is required",
                   validate: (val) => {
                     if (password !== val) {
@@ -317,9 +367,7 @@ export const SignUp = () => {
                   },
                 })}
               />
-              <small className="error">
-                {errors.confirm_password?.message}
-              </small>
+              <small className="error">{errors.password?.message}</small>
             </div>
             <div className="gender-and-dob">
               <div className="gender-box">
@@ -376,7 +424,7 @@ export const SignUp = () => {
                     type="text"
                     placeholder="City"
                     name="city"
-                    value={city && city}
+                    defaultValue={city && city}
                   />
                 </div>
                 <div className="input-box">
@@ -384,7 +432,7 @@ export const SignUp = () => {
                     type="text"
                     placeholder="State"
                     name="state"
-                    value={state && state}
+                    defaultValue={state && state}
                   />
                 </div>
               </div>
