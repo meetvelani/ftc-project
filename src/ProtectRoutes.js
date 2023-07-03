@@ -4,7 +4,7 @@ export const ProtectedRoute = ({ children }) => {
   if (sessionStorage.getItem("token")) {
     return children;
   }
-  return <Navigate to={"/login"} />;
+  return <Navigate to={"/sign-in"} />;
 };
 
 export const PublicRoute = ({ children }) => {
