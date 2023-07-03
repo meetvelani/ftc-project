@@ -15,10 +15,17 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { Viewer } from "@react-pdf-viewer/core";
 import ReactPlayer from "react-player";
 import { FaMusic } from "react-icons/fa";
+import axios from "axios";
 
 export const CreatePostModal = (props) => {
   const imgRef = useRef();
   const [profileImg, setProfileImg] = useState("");
+  const [pincode, setPincode] = useState("");
+  const [pincodeErr, setPincodeErr] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [country, setCountry] = useState("");
+
   const {
     register,
     handleSubmit,
@@ -62,6 +69,50 @@ export const CreatePostModal = (props) => {
     }
   };
 
+  const handleFormSubmit = (values) => {
+    props.onNext(true);
+    props.onHide();
+  };
+
+  const checkPincode = async (e) => {
+    if (e.target.value.length === 0) {
+      return setPincodeErr("Pincode is required");
+    } else {
+      setPincodeErr("");
+    }
+    if (!/^[1-9]{1}[0-9]{2}\s{0,1}[0-9]{3}$/.test(e.target.value)) {
+      setCity("");
+      setState("");
+      setCountry("");
+      return setPincodeErr("Pincode is invalid");
+    } else {
+      setPincodeErr("");
+      try {
+        const response = await axios.get(
+          `https://api.postalpincode.in/pincode/${e.target.value}`
+        );
+        if (response.data[0].Status === "Success") {
+          setPincode(e.target.value);
+          setCity(response.data[0].PostOffice[0].Name);
+          setState(response.data[0].PostOffice[0].State);
+          setCountry(response.data[0].PostOffice[0].Country);
+          setPincodeErr("");
+        } else {
+          setCity("");
+          setState("");
+          setCountry("");
+          setPincodeErr("Pincode is invalid");
+        }
+      } catch (err) {}
+    }
+  };
+
+  const checkRequiredFields = () => {
+    if (city === "") {
+      setPincodeErr("Pincode is required");
+    }
+  };
+
   return (
     <Modal
       {...props}
@@ -72,7 +123,7 @@ export const CreatePostModal = (props) => {
     >
       <div className="modal-body">
         <div className="content">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(handleFormSubmit)}>
             <div className="head">
               <h5>Enter defaulter details</h5>
               <div className="icon-div">
@@ -108,139 +159,245 @@ export const CreatePostModal = (props) => {
               <div className="form">
                 <div className="input-box">
                   <label htmlFor="name">Name</label>
-                  <input
-                    {...register("defaulter_name",{required:'Defaulter name required'})}
-                    name="defaulter_name"
-                    type="text"
-                    placeholder="Defaulter Name"
-                  />
+                  <div className="input-field">
+                    <input
+                      {...register("defaulter_name", {
+                        required: "Defaulter name required",
+                      })}
+                      name="defaulter_name"
+                      type="text"
+                      placeholder="Defaulter Name"
+                    />
+                    <small className="error">
+                      {errors.defaulter_name?.message}
+                    </small>
+                  </div>
                 </div>
+
                 <div className="combined-1 combined">
                   <div className="input-box">
                     <label htmlFor="age">Age</label>
-                    <input
-                      {...register("age")}
-                      name="age"
-                      type="tel"
-                      placeholder="Age"
-                    />
+                    <div className="input-field">
+                      <input
+                        {...register("age", {
+                          required: "Age is required",
+                          pattern: {
+                            value: /^\d+$/,
+                            message: "Only numbers allowed",
+                          },
+                        })}
+                        name="age"
+                        type="tel"
+                        placeholder="Age"
+                      />
+                      <small className="error">{errors.age?.message}</small>
+                    </div>
                   </div>
                   <div className="input-box">
                     <label htmlFor="pincode">Pincode</label>
-                    <input
-                      {...register("pincode")}
-                      name="pincode"
-                      type="tel"
-                      placeholder="Pincode"
-                    />
+                    <div className="input-field">
+                      <input
+                        // {...register("pincode")}
+                        name="pincode"
+                        type="tel"
+                        placeholder="Pincode"
+                        onChange={checkPincode}
+                      />
+                      <small className="error">
+                        {pincodeErr}
+                        {/* {errors.defaulter_name?.message} */}
+                      </small>
+                    </div>
                   </div>
                   <div className="input-box email">
                     <label htmlFor="email">Email</label>
-                    <input
-                      {...register("email")}
-                      name="email"
-                      type="email"
-                      placeholder="Email"
-                    />
+                    <div className="input-field">
+                      <input
+                        {...register("email", {
+                          required: "Email is required",
+                          pattern: {
+                            value:
+                              /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                            message: "Enter a valid email",
+                          },
+                        })}
+                        name="email"
+                        type="email"
+                        placeholder="Email"
+                      />
+                      <small className="error">{errors.email?.message}</small>
+                    </div>
                   </div>
                 </div>
                 <div className="input-box">
                   <label htmlFor="address">Address</label>
-                  <input
-                    {...register("address")}
-                    name="address"
-                    type="text"
-                    placeholder="Address"
-                  />
+                  <div className="input-field">
+                    <input
+                      {...register("address", {
+                        required: "Address is required",
+                      })}
+                      name="address"
+                      type="text"
+                      placeholder="Address"
+                    />
+                    <small className="error">{errors.address?.message}</small>
+                  </div>
                 </div>
                 <div className="combined-2 combined">
                   <div className="input-box">
                     <label htmlFor="city">City</label>
-                    <input
-                      {...register("city")}
-                      name="city"
-                      type="text"
-                      placeholder="City"
-                    />
+                    <div className="input-field">
+                      <input
+                        // {...register("city")}
+                        defaultValue={city}
+                        name="city"
+                        type="text"
+                        placeholder="City"
+                      />
+                      {/* <small className="error">
+                        {errors.defaulter_name?.message}
+                      </small> */}
+                    </div>
                   </div>
                   <div className="input-box">
                     <label htmlFor="state">State</label>
-                    <input
-                      {...register("state")}
-                      name="state"
-                      type="text"
-                      placeholder="State"
-                    />
+                    <div className="input-field">
+                      <input
+                        // {...register("state")}
+                        defaultValue={state}
+                        name="state"
+                        type="text"
+                        placeholder="State"
+                      />
+                      {/* <small className="error">
+                        {errors.defaulter_name?.message}
+                      </small> */}
+                    </div>
                   </div>
                   <div className="input-box">
                     <label htmlFor="country">Country</label>
-                    <input
-                      {...register("country")}
-                      name="country"
-                      type="text"
-                      placeholder="Country"
-                    />
+                    <div className="input-field">
+                      <input
+                        // {...register("country")}
+                        defaultValue={country}
+                        name="country"
+                        type="text"
+                        placeholder="Country"
+                      />
+                      <small className="error">
+                        {/* {errors.defaulter_name?.message} */}
+                      </small>
+                    </div>
                   </div>
                 </div>
                 <div className="combined-3 combined">
                   <div className="input-box">
                     <label htmlFor="aadhar-number">Aadhar No.</label>
-                    <input
-                      {...register("aadhar_number")}
-                      name="aadhar_number"
-                      type="tel"
-                      placeholder="Aadhar No."
-                    />
+                    <div className="input-field">
+                      <input
+                        {...register("aadhar_number", {
+                          required: "Aadhar No. is required",
+                          pattern: {
+                            value: /^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$/gm,
+                            message: "Invalid format",
+                          },
+                        })}
+                        name="aadhar_number"
+                        type="tel"
+                        placeholder="Aadhar No."
+                      />
+                      <small className="error">
+                        {errors.aadhar_number?.message}
+                      </small>
+                    </div>
                   </div>
                   <div className="input-box">
                     <label htmlFor="pancard-number">Pancard No.</label>
-                    <input
-                      {...register("pancard_number")}
-                      name="pancard_number"
-                      type="tel"
-                      placeholder="Pancard No."
-                    />
+                    <div className="input-field">
+                      <input
+                        {...register("pancard_number", {
+                          required: "Pancard No. is required",
+                          pattern: {
+                            value: /[A-Z]{5}[0-9]{4}[A-Z]{1}$/,
+                            message: "Invalid format",
+                          },
+                        })}
+                        name="pancard_number"
+                        type="tel"
+                        placeholder="Pancard No."
+                      />
+                      <small className="error">
+                        {errors.pancard_number?.message}
+                      </small>
+                    </div>
                   </div>
                 </div>
                 <div className="combined-3 combined">
                   <div className="input-box">
                     <label htmlFor="payment-type">Payment Type</label>
-                    <input
-                      {...register("payment_type")}
-                      name="payment_type"
-                      type="text"
-                      placeholder="Payment type"
-                    />
+                    <div className="input-field">
+                      <input
+                        {...register("payment_type", {
+                          required: "Payment type is required",
+                        })}
+                        name="payment_type"
+                        type="text"
+                        placeholder="Payment type"
+                      />
+                      <small className="error">
+                        {errors.payment_type?.message}
+                      </small>
+                    </div>
                   </div>
                   <div className="input-box">
                     <label htmlFor="mobile">Mobile</label>
-                    <input
-                      {...register("phone_number")}
-                      name="phone_number"
-                      type="tel"
-                      placeholder="Mobile"
-                    />
+                    <div className="input-field">
+                      <input
+                        {...register("phone_number", {
+                          required: "Phone number is required",
+                          pattern: {
+                            value: /^(\+91|\+91\-|0)?[456789]\d{9}$/,
+                            message: "Phone number is not valid",
+                          },
+                        })}
+                        name="phone_number"
+                        type="tel"
+                        placeholder="Mobile"
+                      />
+                      <small className="error">
+                        {errors.phone_number?.message}
+                      </small>
+                    </div>
                   </div>
                 </div>
                 <div className="input-box">
                   <label htmlFor="organization">Organization</label>
-                  <input
-                    {...register("organization")}
-                    name="organization"
-                    type="text"
-                    placeholder="Organization"
-                  />
+                  <div className="input-field">
+                    <input
+                      {...register("organization", {
+                        required: "Organization is required",
+                      })}
+                      name="organization"
+                      type="text"
+                      placeholder="Organization"
+                    />
+                    <small className="error">
+                      {errors.organization?.message}
+                    </small>
+                  </div>
                 </div>
               </div>
-              <div
+              <button
                 className="button-primary"
-                onClick={() => {
-                  props.onNext(true);
-                  props.onHide();
-                }}
+                // onClick={() => {
+                //   props.onNext(true);
+                //   props.onHide();
+                // }}
+                onClick={checkRequiredFields}
+                type="submit"
               >
                 Next
-              </div>
+              </button>
             </div>
           </form>
         </div>

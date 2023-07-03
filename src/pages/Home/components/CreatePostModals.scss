@@ -60,33 +60,43 @@
           width: 100%;
           font-size: 1rem;
           display: flex;
-          align-items: center;
+          // align-items: center;
           gap: 0.3rem;
           label {
             font-size: 0.8rem;
+            margin-top: 0.4rem;
             @media (max-width: 550px) {
               display: none;
             }
           }
-          input {
+          .input-field {
             width: 100%;
-            border: none;
-            outline: none;
-            background-color: $color-bg-primary;
-            border-radius: 1rem;
-            font-size: 0.9rem;
-            padding: 0.3rem;
-            border: 1px solid $color-bg-primary-dark;
-            &:focus {
-              background-color: #fff;
-            }
-            &::placeholder {
-              visibility: hidden;
-            }
-            @media (max-width: 550px) {
-              &::placeholder {
-                visibility: visible;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.2rem;
+            input {
+              width: 100%;
+              border: none;
+              outline: none;
+              background-color: $color-bg-primary;
+              border-radius: 1rem;
+              font-size: 0.9rem;
+              padding: 0.3rem;
+              border: 1px solid $color-bg-primary-dark;
+              &:focus {
+                background-color: #fff;
               }
+              &::placeholder {
+                visibility: hidden;
+              }
+              @media (max-width: 550px) {
+                &::placeholder {
+                  visibility: visible;
+                }
+              }
+            }
+            .error{
+              font-size: 0.7rem;
             }
           }
         }
