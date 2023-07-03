@@ -9,18 +9,19 @@ import "./Navbar.scss";
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useStateValue } from "../../StateProvider";
-import { RiLoginCircleFill } from "react-icons/ri";
+import { RiLoginBoxFill } from "react-icons/ri";
 
 export const Navbar = () => {
   const { pathname } = useLocation();
   const [profileImg, setProfileImg] = useState(false);
   const navigate = useNavigate();
   const [{ userLoggedIn }, dispatch] = useStateValue();
+  console.log(userLoggedIn, "LOG");
 
   const logout = () => {
     sessionStorage.clear();
     dispatch({ type: "SET_LOGIN_STATUS", status: false });
-    navigate('/sign-in')
+    navigate("/sign-in");
   };
   return (
     <div className="navbar">
@@ -92,12 +93,12 @@ export const Navbar = () => {
                   </Link>
                 </div>
               ) : (
-                <Link className="underline-none" to={"/sign-in"}>
-                  <div className="icon-box">
-                    <RiLoginCircleFill className="option-icon" />
+                <div className="icon-box">
+                  <Link className="underline-none" to={"/sign-in"}>
+                    <RiLoginBoxFill className="option-icon" />
                     <span>Sign in</span>
-                  </div>
-                </Link>
+                  </Link>
+                </div>
               )}
               <div className="logout-link">
                 <span onClick={logout}>Sign out</span>
