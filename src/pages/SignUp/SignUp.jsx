@@ -11,6 +11,7 @@ import { TiTick, TiTimes } from "react-icons/ti";
 import { useMutation } from "@tanstack/react-query";
 import { signup } from "../../apiCall";
 import { toast } from "react-hot-toast";
+import { useStateValue } from "../../StateProvider";
 
 export const SignUp = () => {
   const [today, setToday] = useState();
@@ -28,12 +29,13 @@ export const SignUp = () => {
   const [passSpecialChars, setPassSetSpecialChars] = useState(true);
   const [passMinLength, setPassMinLength] = useState(true);
   const [passMaxLength, setPassMaxLength] = useState(true);
-  const [initialPwValidationMsgs, setInitialPwValidationMsgs] = useState(false);
+  const [showPwValidationMsgs, setShowPwValidationMsgs] = useState(false);
   const navigate = useNavigate();
+  const [, dispatch] = useStateValue();
 
   // Validate password
   const validatePassword = (password) => {
-    setInitialPwValidationMsgs(true);
+    setShowPwValidationMsgs(true);
     setPassword(password);
     if (password !== "") {
       setPasswordErr("");
@@ -123,13 +125,13 @@ export const SignUp = () => {
     mutationFn: signup,
     onSuccess: (data) => {
       // console.log("DATA!!!!!", data.data);
-
       if (!data.data?.access_token) {
         return toast.error(data.data?.status[0]?.Message);
       }
       toast.success("Signup successful");
       sessionStorage.setItem("token", data.data?.access_token);
       sessionStorage.setItem("refresh_token", data.data?.refresh_token);
+      dispatch({ type: "SET_LOGIN_STATUS", status: true });
       navigate("/");
     },
     onError: (err) => {
@@ -145,11 +147,11 @@ export const SignUp = () => {
   const doSignup = (values) => {
     values = {
       ...values,
-      phone_number: parseInt(values.phone_number),
+      phone_number: values.phone_number,
       gender: gender,
       city: city,
       state: state,
-      pincode: parseInt(pincode),
+      pincode: pincode,
       region: "",
       is_google_login: false,
       coin: 0,
@@ -319,7 +321,7 @@ export const SignUp = () => {
               />
               <small className="error">{passwordErr}</small>
               {/* <small className="error">{errors.password?.message}</small> */}
-              {initialPwValidationMsgs && (
+              {showPwValidationMsgs && (
                 <>
                   <small className={passMinLength ? "error" : "success"}>
                     {!passMinLength ? <TiTick /> : <TiTimes />} Must have at

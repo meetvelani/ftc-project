@@ -14,6 +14,7 @@ import { Worker } from "@react-pdf-viewer/core";
 import { Chat } from "./pages/Chat/Chat";
 import { Notifications } from "./pages/Notifications/Notifications";
 import { AdvanceSearch } from "./pages/AdvanceSearch/AdvanceSearch";
+import { ProtectedRoute, PublicRoute } from "./ProtectRoutes";
 
 function App() {
   return (
@@ -35,89 +36,89 @@ function App() {
             <Route
               path="/sign-in"
               element={
-                <>
+                <PublicRoute>
                   <Navbar />
                   <SignIn />
-                </>
+                </PublicRoute>
               }
             />
             <Route
               path="/sign-up"
               element={
-                <>
+                <PublicRoute>
                   <Navbar />
                   <SignUp />
-                </>
+                </PublicRoute>
               }
             />
             <Route
               path="/view-profile"
               element={
-                <>
+                <ProtectedRoute>
                   <Navbar />
                   <ViewProfile />
                   <MobileViewOptions />
-                </>
+                </ProtectedRoute>
               }
             />
             <Route
               path="/edit-profile"
               element={
-                <>
+                <ProtectedRoute>
                   <Navbar />
                   <EditProfile />
                   <MobileViewOptions />
-                </>
+                </ProtectedRoute>
               }
             />
             <Route
               path="/shop"
               element={
-                <>
+                <ProtectedRoute>
                   <Navbar />
                   <Shop />
                   <MobileViewOptions />
-                </>
+                </ProtectedRoute>
               }
             />
             <Route
               path="/messaging"
               element={
-                <>
+                <ProtectedRoute>
                   <Navbar />
                   <Messaging />
                   <MobileViewOptions />
-                </>
+                </ProtectedRoute>
               }
             />
             <Route
               path="/chat"
               element={
-                <>
+                <ProtectedRoute>
                   <Navbar />
                   <Chat />
                   <MobileViewOptions />
-                </>
+                </ProtectedRoute>
               }
             />
             <Route
               path="/notifications"
               element={
-                <>
+                <ProtectedRoute>
                   <Navbar />
                   <Notifications />
                   <MobileViewOptions />
-                </>
+                </ProtectedRoute>
               }
             />
             <Route
               path="/advance-search"
               element={
-                <>
+                <ProtectedRoute>
                   <Navbar />
                   <AdvanceSearch />
                   <MobileViewOptions />
-                </>
+                </ProtectedRoute>
               }
             />
           </Routes>

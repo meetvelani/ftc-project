@@ -1,5 +1,5 @@
 import Modal from "react-bootstrap/Modal";
-import "./HomeModals.scss";
+import "./CreatePostModals.scss";
 import { GrFormClose } from "react-icons/gr";
 import { TbCameraPlus } from "react-icons/tb";
 import { useState } from "react";
@@ -27,7 +27,7 @@ export const CreatePostModal = (props) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: "",
+      defaulter_name: "",
       age: "",
       pincode: "",
       email: "",
@@ -35,10 +35,10 @@ export const CreatePostModal = (props) => {
       city: "",
       state: "",
       country: "",
-      aadharNo: "",
-      pancardNo: "",
-      paymentType: "",
-      mobile: "",
+      aadhar_number: "",
+      pancard_number: "",
+      payment_type: "",
+      phone_number: "",
       organization: "",
     },
   });
@@ -109,10 +109,10 @@ export const CreatePostModal = (props) => {
                 <div className="input-box">
                   <label htmlFor="name">Name</label>
                   <input
-                    {...register("name")}
-                    name="name"
+                    {...register("defaulter_name",{required:'Defaulter name required'})}
+                    name="defaulter_name"
                     type="text"
-                    placeholder="Name"
+                    placeholder="Defaulter Name"
                   />
                 </div>
                 <div className="combined-1 combined">
@@ -186,8 +186,8 @@ export const CreatePostModal = (props) => {
                   <div className="input-box">
                     <label htmlFor="aadhar-number">Aadhar No.</label>
                     <input
-                      {...register("aadharNo")}
-                      name="aadharNo"
+                      {...register("aadhar_number")}
+                      name="aadhar_number"
                       type="tel"
                       placeholder="Aadhar No."
                     />
@@ -195,8 +195,8 @@ export const CreatePostModal = (props) => {
                   <div className="input-box">
                     <label htmlFor="pancard-number">Pancard No.</label>
                     <input
-                      {...register("pancardNo")}
-                      name="pancardNo"
+                      {...register("pancard_number")}
+                      name="pancard_number"
                       type="tel"
                       placeholder="Pancard No."
                     />
@@ -206,8 +206,8 @@ export const CreatePostModal = (props) => {
                   <div className="input-box">
                     <label htmlFor="payment-type">Payment Type</label>
                     <input
-                      {...register("paymentType")}
-                      name="paymentType"
+                      {...register("payment_type")}
+                      name="payment_type"
                       type="text"
                       placeholder="Payment type"
                     />
@@ -215,8 +215,8 @@ export const CreatePostModal = (props) => {
                   <div className="input-box">
                     <label htmlFor="mobile">Mobile</label>
                     <input
-                      {...register("mobile")}
-                      name="mobile"
+                      {...register("phone_number")}
+                      name="phone_number"
                       type="tel"
                       placeholder="Mobile"
                     />

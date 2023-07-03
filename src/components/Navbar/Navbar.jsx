@@ -8,12 +8,20 @@ import { BsFillChatLeftTextFill, BsPersonCircle } from "react-icons/bs";
 import "./Navbar.scss";
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useStateValue } from "../../StateProvider";
+import { RiLoginCircleFill } from "react-icons/ri";
 
 export const Navbar = () => {
   const { pathname } = useLocation();
-  const [profileImg, setProfileImg] = useState(true);
-  const [userLoggedIn, setUserLoggedIn] = useState(false);
+  const [profileImg, setProfileImg] = useState(false);
   const navigate = useNavigate();
+  const [{ userLoggedIn }, dispatch] = useStateValue();
+
+  const logout = () => {
+    sessionStorage.clear();
+    dispatch({ type: "SET_LOGIN_STATUS", status: false });
+    navigate('/sign-in')
+  };
   return (
     <div className="navbar">
       <div className="navbar-inner-box">
@@ -68,23 +76,31 @@ export const Navbar = () => {
                   <span>Shop</span>
                 </Link>
               </div>
-              <div
-                className={`icon-box ${
-                  pathname === "/view-profile" && "active"
-                }`}
-              >
-                <Link className="underline-none" to={"/view-profile"}>
-                  {profileImg ? (
-                    <img
-                      src="https://sm.ign.com/ign_ap/cover/a/avatar-gen/avatar-generations_hugw.jpg"
-                      alt=""
-                      className="profile-img"
-                    />
-                  ) : (
-                    <BsPersonCircle className="option-icon" />
-                  )}
-                  <span>Me</span>
+              {userLoggedIn ? (
+                <div
+                  className={`icon-box profile ${
+                    pathname === "/view-profile" && "active"
+                  }`}
+                >
+                  <Link className="underline-none" to={"/view-profile"}>
+                    {profileImg ? (
+                      <img src="" alt="" className="profile-img" />
+                    ) : (
+                      <BsPersonCircle className="option-icon" />
+                    )}
+                    <span>Me</span>
+                  </Link>
+                </div>
+              ) : (
+                <Link className="underline-none" to={"/sign-in"}>
+                  <div className="icon-box">
+                    <RiLoginCircleFill className="option-icon" />
+                    <span>Sign in</span>
+                  </div>
                 </Link>
+              )}
+              <div className="logout-link">
+                <span onClick={logout}>Sign out</span>
               </div>
             </>
           )}

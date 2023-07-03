@@ -4,18 +4,20 @@ import {
   AddMoreDetailsModal,
   ConfirmationModal,
   CreatePostModal,
-} from "./components/HomeModals";
+} from "./components/CreatePostModals";
 import { News } from "../../components/News/News";
 import ProfileImg from "../../assets/images/profile-picture.png";
 import SliderImg1 from "../../assets/images/postImg1.webp";
 import SliderImg2 from "../../assets/images/postImg2.jpg";
 import { Post } from "../../components/Post/Post";
 import { toast } from "react-hot-toast";
+import { useStateValue } from "../../StateProvider";
 
 export const Home = () => {
   const [showFormModal, setShowFormModal] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [showAddMoreModal, setShowAddMoreModal] = useState(false);
+  const [{ userLoggedIn }] = useStateValue();
 
   const posts = [
     {
@@ -57,17 +59,21 @@ export const Home = () => {
     },
   ];
 
-  const uploadPost = ()=>{
-    toast.success('Post uploaded')
-  }
+  const uploadPost = () => {
+    toast.success("Post uploaded");
+  };
+
+  const handleShowModal = () => {
+    if (userLoggedIn) {
+      return setShowFormModal(!showFormModal);
+    }
+    toast.error("Sign in to create post");
+  };
   return (
     <div className="home-container">
       <div className="posts-section">
         <div className="create-post">
-          <button
-            className="button-primary"
-            onClick={() => setShowFormModal(!showFormModal)}
-          >
+          <button className="button-primary" onClick={handleShowModal}>
             Create Post
           </button>
           <CreatePostModal
@@ -98,7 +104,7 @@ export const Home = () => {
             onPost={() => {
               setShowConfirmationModal(false);
               setShowAddMoreModal(false);
-              uploadPost()
+              uploadPost();
             }}
           />
           {posts.length === 0 && (
@@ -108,8 +114,8 @@ export const Home = () => {
           )}
         </div>
         <div className="posts">
-          {posts.map((post,index) => {
-            return <Post post={post} key={index}/>;
+          {posts.map((post, index) => {
+            return <Post post={post} key={index} />;
           })}
         </div>
       </div>

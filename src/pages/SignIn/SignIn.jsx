@@ -10,10 +10,12 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { signin } from "../../apiCall";
 import { toast } from "react-hot-toast";
+import { useStateValue } from "../../StateProvider";
 
 export const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const [state, dispatch] = useStateValue();
 
   const {
     register,
@@ -26,22 +28,24 @@ export const SignIn = () => {
   const signinMutation = useMutation({
     mutationFn: signin,
     onSuccess: (data) => {
-      if(!data.data?.access_token){
-        return toast.error(data.data?.status[0]?.Message)
+      if (!data.data?.access_token) {
+        return toast.error(data.data?.status[0]?.Message);
       }
       toast.success("Login successful");
       sessionStorage.setItem("token", data.data?.access_token);
       sessionStorage.setItem("refresh_token", data.data?.refresh_token);
+      dispatch({ type: "SET_LOGIN_STATUS", status: true });
       navigate("/");
     },
-    onError:(err)=>{
-      console.log(err,"Error")
-    }
+    onError: (err) => {
+      toast.error("Something went wrong");
+      console.log(err, "Error");
+    },
   });
 
   // Do sign in
   const doSignin = (values) => {
-    signinMutation.mutate(values)
+    signinMutation.mutate(values);
     // navigate("/");
   };
   return (
