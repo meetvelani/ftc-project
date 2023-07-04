@@ -1,5 +1,6 @@
 export const initialState = {
   userLoggedIn: sessionStorage.getItem("token") ? true : false,
+  createPostData:{}
 };
 
 function reducer(state, action) {
@@ -9,6 +10,11 @@ function reducer(state, action) {
       return {
         ...state,
         userLoggedIn: action.status,
+      };
+    case "SET_CREATE_POST_DATA":
+      return {
+        ...state,
+        createPostData: action.data,
       };
     default:
       return state;

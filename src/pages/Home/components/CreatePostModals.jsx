@@ -16,6 +16,9 @@ import { Viewer } from "@react-pdf-viewer/core";
 import ReactPlayer from "react-player";
 import { FaMusic } from "react-icons/fa";
 import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
+import { createPost } from "../../../apiCall";
+import { useStateValue } from "../../../StateProvider";
 
 export const CreatePostModal = (props) => {
   const imgRef = useRef();
@@ -26,6 +29,8 @@ export const CreatePostModal = (props) => {
   const [state, setState] = useState("");
   const [country, setCountry] = useState("");
 
+  const [{ createPostData }, dispatch] = useStateValue();
+
   const {
     register,
     handleSubmit,
@@ -34,19 +39,19 @@ export const CreatePostModal = (props) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      defaulter_name: "",
-      age: "",
-      pincode: "",
-      email: "",
-      address: "",
-      city: "",
-      state: "",
-      country: "",
-      aadhar_number: "",
-      pancard_number: "",
-      payment_type: "",
-      phone_number: "",
-      organization: "",
+      defaulter_name: createPostData?.defaulter_name || "",
+      age: createPostData?.age || "",
+      // pincode: createPostData?.pincode || "",
+      email: createPostData?.email || "",
+      address: createPostData?.address || "",
+      // city: createPostData?.city || "",
+      // state: createPostData?.state || "",
+      // country: createPostData?.country || "",
+      aadhar_number: createPostData?.aadhar_number || "",
+      pancard_number: createPostData?.pancard_number || "",
+      payment_type: createPostData?.payment_type || "",
+      phone_number: createPostData?.phone_number || "",
+      organization: createPostData?.organization || "",
     },
   });
 
@@ -70,6 +75,14 @@ export const CreatePostModal = (props) => {
   };
 
   const handleFormSubmit = (values) => {
+    values = {
+      ...values,
+      pincode,
+      city,
+      state,
+      country,
+    };
+    dispatch({ type: "SET_CREATE_POST_DATA", data: values });
     props.onNext(true);
     props.onHide();
   };
@@ -113,6 +126,16 @@ export const CreatePostModal = (props) => {
     }
   };
 
+  const quitCreatePost = () => {
+    dispatch({ type: "SET_CREATE_POST_DATA", data: {} });
+    reset();
+    setPincode("");
+    setCity("");
+    setState("");
+    setCountry("");
+    props.onHide();
+  };
+
   return (
     <Modal
       {...props}
@@ -130,7 +153,7 @@ export const CreatePostModal = (props) => {
                 <GrFormClose
                   className="icon"
                   size={25}
-                  onClick={props.onHide}
+                  onClick={quitCreatePost}
                 />
               </div>
             </div>
@@ -202,6 +225,7 @@ export const CreatePostModal = (props) => {
                         type="tel"
                         placeholder="Pincode"
                         onChange={checkPincode}
+                        defaultValue={pincode}
                       />
                       <small className="error">
                         {pincodeErr}
@@ -234,7 +258,7 @@ export const CreatePostModal = (props) => {
                   <div className="input-field">
                     <input
                       {...register("address", {
-                        required: "Address is required",
+                        // required: "Address is required",
                       })}
                       name="address"
                       type="text"
@@ -296,7 +320,7 @@ export const CreatePostModal = (props) => {
                     <div className="input-field">
                       <input
                         {...register("aadhar_number", {
-                          required: "Aadhar No. is required",
+                          // required: "Aadhar No. is required",
                           pattern: {
                             value: /^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$/gm,
                             message: "Invalid format",
@@ -316,7 +340,7 @@ export const CreatePostModal = (props) => {
                     <div className="input-field">
                       <input
                         {...register("pancard_number", {
-                          required: "Pancard No. is required",
+                          // required: "Pancard No. is required",
                           pattern: {
                             value: /[A-Z]{5}[0-9]{4}[A-Z]{1}$/,
                             message: "Invalid format",
@@ -338,7 +362,7 @@ export const CreatePostModal = (props) => {
                     <div className="input-field">
                       <input
                         {...register("payment_type", {
-                          required: "Payment type is required",
+                          // required: "Payment type is required",
                         })}
                         name="payment_type"
                         type="text"
@@ -375,7 +399,7 @@ export const CreatePostModal = (props) => {
                   <div className="input-field">
                     <input
                       {...register("organization", {
-                        required: "Organization is required",
+                        // required: "Organization is required",
                       })}
                       name="organization"
                       type="text"
@@ -407,6 +431,7 @@ export const CreatePostModal = (props) => {
 };
 
 export const ConfirmationModal = (props) => {
+  const [{ createPostData }] = useStateValue();
   return (
     <Modal
       {...props}
@@ -434,55 +459,55 @@ export const ConfirmationModal = (props) => {
               <tbody>
                 <tr>
                   <td>Name</td>
-                  <td>Pranav </td>
+                  <td>{createPostData?.defaulter_name}</td>
                 </tr>
                 <tr>
                   <td>Age</td>
-                  <td></td>
+                  <td>{createPostData?.age}</td>
                 </tr>
                 <tr>
                   <td>Pincode</td>
-                  <td></td>
+                  <td>{createPostData?.pincode}</td>
                 </tr>
                 <tr>
                   <td>Email</td>
-                  <td></td>
+                  <td>{createPostData?.email}</td>
                 </tr>
                 <tr>
                   <td>Address</td>
-                  <td></td>
+                  <td>{createPostData?.address}</td>
                 </tr>
                 <tr>
                   <td>City</td>
-                  <td></td>
+                  <td>{createPostData?.city}</td>
                 </tr>
                 <tr>
                   <td>State</td>
-                  <td></td>
+                  <td>{createPostData?.state}</td>
                 </tr>
                 <tr>
                   <td>Country</td>
-                  <td></td>
+                  <td>{createPostData?.country}</td>
                 </tr>
                 <tr>
                   <td>Aadhar Number</td>
-                  <td></td>
+                  <td>{createPostData?.aadhar_number}</td>
                 </tr>
                 <tr>
                   <td>Pancard Number</td>
-                  <td></td>
+                  <td>{createPostData?.pancard_number}</td>
                 </tr>
                 <tr>
                   <td>Payment Type</td>
-                  <td></td>
+                  <td>{createPostData?.payment_type}</td>
                 </tr>
                 <tr>
                   <td>Mobile</td>
-                  <td></td>
+                  <td>{createPostData?.phone_number}</td>
                 </tr>
                 <tr>
                   <td>Organization</td>
-                  <td></td>
+                  <td>{createPostData?.organization}</td>
                 </tr>
               </tbody>
             </Table>
@@ -511,6 +536,8 @@ export const AddMoreDetailsModal = (props) => {
   const [videos, setVideos] = useState([]);
   const [audios, setAudios] = useState([]);
   const [activeSlide, setActiveSlide] = useState(0);
+  const [detail, setDetail] = useState("");
+  let [{ createPostData }, dispatch] = useStateValue();
 
   // Selecting images
   const onImageSelect = (file) => {
@@ -534,8 +561,6 @@ export const AddMoreDetailsModal = (props) => {
             position: "top-center",
             style: {
               borderRadius: "10px",
-              // background: "#333",
-              // color: "#fff",
             },
           });
         }
@@ -633,6 +658,7 @@ export const AddMoreDetailsModal = (props) => {
     setActiveSlide(nextSlide);
   };
 
+  // slider settings
   const settings = {
     dots: false,
     infinite: true,
@@ -642,6 +668,30 @@ export const AddMoreDetailsModal = (props) => {
     prevArrow: <IoIosArrowBack className="slick-prev" />,
     nextArrow: <IoIosArrowForward className="slick-next" />,
     beforeChange: handleSlideChange,
+  };
+
+  const postUploadMutation = useMutation({
+    mutationFn: createPost,
+    onSuccess: (response) => {
+      console.log(response.data, "RESPONSE");
+      dispatch({ type: "SET_CREATE_POST_DATA", data: {} });
+      if (response.data.post_id) {
+        toast.success(response.data?.status[0]?.ResponseMessage);
+      }
+    },
+    onError: (err) => {
+      console.log(err, "Error");
+      toast.error('Something went wrong')
+    },
+  });
+
+  // Upload post
+  const postUpload = () => {
+    props.onPost();
+
+    createPostData = { ...createPostData, detail };
+    console.log(createPostData, "createPostData");
+    postUploadMutation.mutate(createPostData);
   };
 
   return (
@@ -675,11 +725,12 @@ export const AddMoreDetailsModal = (props) => {
             <div className="text-field">
               <textarea
                 placeholder="Type something..."
-                name="description"
+                name="detail"
                 id=""
                 cols="30"
                 rows="6"
-              ></textarea>
+                onChange={(e) => setDetail(e.target.value)}
+              />
             </div>
 
             {imgs.length !== 0 && (
@@ -806,7 +857,7 @@ export const AddMoreDetailsModal = (props) => {
                   <span>Add Document</span>
                 </div>
               </div>
-              <button className="button-primary" onClick={props.onPost}>
+              <button className="button-primary" onClick={postUpload}>
                 Post
               </button>
             </div>

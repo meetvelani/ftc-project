@@ -12,11 +12,14 @@ import SliderImg2 from "../../assets/images/postImg2.jpg";
 import { Post } from "../../components/Post/Post";
 import { toast } from "react-hot-toast";
 import { useStateValue } from "../../StateProvider";
+import { useQuery } from "@tanstack/react-query";
+import { getAllPosts } from "../../apiCall";
 
 export const Home = () => {
   const [showFormModal, setShowFormModal] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [showAddMoreModal, setShowAddMoreModal] = useState(false);
+  // const [posts, setPosts] = useState([]);
   const [{ userLoggedIn }] = useStateValue();
 
   const posts = [
@@ -59,10 +62,12 @@ export const Home = () => {
     },
   ];
 
-  const uploadPost = () => {
-    toast.success("Post uploaded");
-  };
-
+  const { data, isLoading } = useQuery({
+    queryKey: ["posts"],
+    queryFn: () => getAllPosts(1),
+  });
+ 
+  // Show modals if the user logged in
   const handleShowModal = () => {
     if (userLoggedIn) {
       return setShowFormModal(!showFormModal);
@@ -104,7 +109,6 @@ export const Home = () => {
             onPost={() => {
               setShowConfirmationModal(false);
               setShowAddMoreModal(false);
-              uploadPost();
             }}
           />
           {posts.length === 0 && (
@@ -114,9 +118,10 @@ export const Home = () => {
           )}
         </div>
         <div className="posts">
-          {posts.map((post, index) => {
-            return <Post post={post} key={index} />;
-          })}
+          {posts &&
+            posts.map((post, index) => {
+              return <Post post={post} key={index} />;
+            })}
         </div>
       </div>
       <div className="news-section">

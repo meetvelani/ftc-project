@@ -5,4 +5,6 @@ export const domainName="http://127.0.0.1:8080"
 export const api={
     signup : "/api/signup",
     signin : "/api/login",
+    createPost : "/api/post",
+    allPosts : "/api/all-post/",
 }
