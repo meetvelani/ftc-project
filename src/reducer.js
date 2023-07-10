@@ -1,6 +1,7 @@
 export const initialState = {
   userLoggedIn: sessionStorage.getItem("token") ? true : false,
-  createPostData:{}
+  createPostData:{},
+  isLoading:false
 };
 
 function reducer(state, action) {
@@ -15,6 +16,11 @@ function reducer(state, action) {
       return {
         ...state,
         createPostData: action.data,
+      };
+    case "SET_LOADING":
+      return {
+        ...state,
+        isLoading: action.status,
       };
     default:
       return state;

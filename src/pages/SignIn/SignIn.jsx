@@ -15,7 +15,7 @@ import { useStateValue } from "../../StateProvider";
 export const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const [state, dispatch] = useStateValue();
+  const [{ isLoading }, dispatch] = useStateValue();
 
   const {
     register,
@@ -25,28 +25,34 @@ export const SignIn = () => {
     defaultValues: { username_or_email: "", password: "" },
   });
 
-  const signinMutation = useMutation({
-    mutationFn: signin,
+  const signinMutation = useMutation(signin, {
     onSuccess: (data) => {
-      if (!data.data?.access_token) {
-        return toast.error(data.data?.status[0]?.Message);
+      const loginFailed = data?.data["status"][0]["Error"];
+      if (loginFailed === "False") {
+        sessionStorage.setItem("token", data?.data?.access_token);
+        sessionStorage.setItem("refresh_token", data?.data?.refresh_token);
+        toast.success("Login successful");
+        dispatch({ type: "SET_LOADING", status: false });
+        dispatch({ type: "SET_LOGIN_STATUS", status: true });
+        navigate("/");
+      } else {
+        dispatch({ type: "SET_LOADING", status: false });
+        const errResponses = data?.data["status"][0]["Message"];
+        const message = Object.values(errResponses);
+        toast.error(message[0]);
       }
-      toast.success("Login successful");
-      sessionStorage.setItem("token", data.data?.access_token);
-      sessionStorage.setItem("refresh_token", data.data?.refresh_token);
-      dispatch({ type: "SET_LOGIN_STATUS", status: true });
-      navigate("/");
     },
     onError: (err) => {
       toast.error("Something went wrong");
       console.log(err, "Error");
+      dispatch({ type: "SET_LOADING", status: false });
     },
   });
 
   // Do sign in
   const doSignin = (values) => {
+    dispatch({ type: "SET_LOADING", status: true });
     signinMutation.mutate(values);
-    // navigate("/");
   };
   return (
     <div className="sign-in-container">

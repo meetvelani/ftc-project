@@ -10,6 +10,7 @@ import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useStateValue } from "../../StateProvider";
 import { RiLoginBoxFill } from "react-icons/ri";
+import { SlLogout } from "react-icons/sl";
 
 export const Navbar = () => {
   const { pathname } = useLocation();
@@ -102,6 +103,9 @@ export const Navbar = () => {
               )}
               <div className="logout-link">
                 <span onClick={logout}>Sign out</span>
+              </div>
+              <div className="sm-logout-link">
+                <SlLogout className="option-icon" onClick={logout} />
               </div>
             </>
           )}

@@ -69,7 +69,8 @@
       align-items: center;
       position: relative;
       .icon-box,
-      .underline-none {
+      .underline-none,
+      .sm-logout-link {
         display: flex;
         flex-direction: column;
         gap: 0.2rem;
@@ -112,8 +113,10 @@
       .active {
         border-bottom: 2px solid $color-primary;
       }
-      .profile:hover + .logout-link {
-        display: inline-block;
+      @media (min-width: 1024px) {
+        .profile:hover + .logout-link {
+          display: inline-block;
+        }
       }
       .logout-link {
         display: none;
@@ -125,16 +128,19 @@
         border-radius: 0.5rem;
         background-color: #fff;
         box-shadow: 1px 1px 0.3rem rgba(0, 0, 0, 0.3);
-        transition: all .3s ease-in-out;
+        transition: all 0.3s ease-in-out;
         span {
           cursor: pointer;
           text-align: center;
           font-weight: 500;
           font-size: 0.8rem !important;
         }
-        &:hover{
+        &:hover {
           display: inline-block;
         }
+      }
+      .sm-logout-link {
+        display: none;
       }
     }
   }
@@ -168,6 +174,9 @@
         }
         .active {
           border-bottom: none;
+        }
+        .sm-logout-link {
+          display: inline-block;
         }
       }
     }

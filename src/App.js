@@ -15,12 +15,16 @@ import { Chat } from "./pages/Chat/Chat";
 import { Notifications } from "./pages/Notifications/Notifications";
 import { AdvanceSearch } from "./pages/AdvanceSearch/AdvanceSearch";
 import { ProtectedRoute, PublicRoute } from "./ProtectRoutes";
+import { useStateValue } from "./StateProvider";
+import { Spinner } from "./components/Spinner/Spinner";
 
 function App() {
+  const [{ isLoading }] = useStateValue();
   return (
     <div className="main">
       <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
         <Toaster position="top-center" reverseOrder={false} />
+        {isLoading && <Spinner />}
         <BrowserRouter>
           <Routes>
             <Route
