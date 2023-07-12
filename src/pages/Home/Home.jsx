@@ -1,10 +1,6 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import "./Home.scss";
-import {
-  AddMoreDetailsModal,
-  ConfirmationModal,
-  CreatePostModal,
-} from "./components/CreatePostModals";
+import { CreatePostModal } from "./components/CreatePostModals";
 import { News } from "../../components/News/News";
 import ProfileImg from "../../assets/images/profile-picture.png";
 import SliderImg1 from "../../assets/images/postImg1.webp";
@@ -12,61 +8,83 @@ import SliderImg2 from "../../assets/images/postImg2.jpg";
 import { Post } from "../../components/Post/Post";
 import { toast } from "react-hot-toast";
 import { useStateValue } from "../../StateProvider";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { getAllPosts } from "../../apiCall";
+import { Spinner } from "../../components/Spinner/Spinner";
 
 export const Home = () => {
   const [showFormModal, setShowFormModal] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [showAddMoreModal, setShowAddMoreModal] = useState(false);
   // const [posts, setPosts] = useState([]);
-  const [{ userLoggedIn }] = useStateValue();
+  const [{ userLoggedIn }, dispatch] = useStateValue();
 
-  const posts = [
-    {
-      dp: ProfileImg,
-      name: "Pranav",
-      description: "Good morning",
-      postItems: [
-        { url: SliderImg1, type: "image" },
-        { url: SliderImg2, type: "image" },
-      ],
-    },
-    {
-      dp: ProfileImg,
-      name: "Pranav",
-      description: "Good morning",
-      postItems: [
-        // { url: video1, type: "video" },
-        // { url: video2, type: "video" },
-        // { url: video3, type: "video" },
-      ],
-    },
-    {
-      dp: ProfileImg,
-      name: "Pranav",
-      description: "Good morning",
-      postItems: [
-        // { url: pdf1, type: "document" },
-        // { url: pdf2, type: "document" },
-      ],
-    },
-    {
-      dp: ProfileImg,
-      name: "Pranav",
-      description: "Good morning",
-      postItems: [
-        // { url: audio, type: "audio" },
-        // { url: audio, type: "audio" },
-      ],
-    },
-  ];
+  // const posts = [
+  // {
+  //   dp: ProfileImg,
+  //   name: "Pranav",
+  //   description: "Good morning",
+  //   postItems: [
+  //     { url: SliderImg1, type: "image" },
+  //     { url: SliderImg2, type: "image" },
+  //   ],
+  // },
+  // {
+  //   dp: ProfileImg,
+  //   name: "Pranav",
+  //   description: "Good morning",
+  //   postItems: [
+  //     // { url: video1, type: "video" },
+  //     // { url: video2, type: "video" },
+  //     // { url: video3, type: "video" },
+  //   ],
+  // },
+  // {
+  //   dp: ProfileImg,
+  //   name: "Pranav",
+  //   description: "Good morning",
+  //   postItems: [
+  //     // { url: pdf1, type: "document" },
+  //     // { url: pdf2, type: "document" },
+  //   ],
+  // },
+  // {
+  //   dp: ProfileImg,
+  //   name: "Pranav",
+  //   description: "Good morning",
+  //   postItems: [
+  //     // { url: audio, type: "audio" },
+  //     // { url: audio, type: "audio" },
+  //   ],
+  // },
+  // ];
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["posts"],
-    queryFn: () => getAllPosts(1),
+  const {
+    data: posts,
+    isLoading,
+    isError,
+    error,
+    hasNextPage,
+    fetchNextPage,
+  } = useInfiniteQuery(["all-posts"], getAllPosts, {
+    getNextPageParam: (_lastPage, pages) => {
+      // console.log(pages, "pages count");
+      if (pages.length < pages[0]?.data?.posts?.total_pages) {
+        return pages.length + 1;
+      } else {
+        return undefined;
+      }
+    },
   });
- 
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  // console.log(hasNextPage, "hasNextPage");
+  console.log(posts, "data");
+  // console.log(error, "error");
+
   // Show modals if the user logged in
   const handleShowModal = () => {
     if (userLoggedIn) {
@@ -86,32 +104,7 @@ export const Home = () => {
             onHide={() => setShowFormModal(false)}
             onNext={(status) => setShowConfirmationModal(status)}
           />
-          <ConfirmationModal
-            show={showConfirmationModal}
-            onHide={() => {
-              setShowConfirmationModal(false);
-              setShowFormModal(true);
-            }}
-            onEdit={() => {
-              setShowConfirmationModal(false);
-              setShowFormModal(true);
-            }}
-            onConfirm={() => {
-              setShowAddMoreModal(true);
-            }}
-          />
-          <AddMoreDetailsModal
-            show={showAddMoreModal}
-            onHide={() => {
-              setShowConfirmationModal(true);
-              setShowAddMoreModal(false);
-            }}
-            onPost={() => {
-              setShowConfirmationModal(false);
-              setShowAddMoreModal(false);
-            }}
-          />
-          {posts.length === 0 && (
+          {posts?.pages[0].data.posts.posts.length === 0 && (
             <h2>
               There are no posts right now or check your internet connection
             </h2>
@@ -119,9 +112,26 @@ export const Home = () => {
         </div>
         <div className="posts">
           {posts &&
-            posts.map((post, index) => {
-              return <Post post={post} key={index} />;
+            posts?.pages.map((group, index) => {
+              return (
+                <Fragment key={index}>
+                  {group?.data?.posts?.posts?.map((post, index) => {
+                    return <Post key={post.post_details.id} post={post} />;
+                  })}
+                </Fragment>
+              );
             })}
+          {posts?.pages[0].data.posts.posts.length ? (
+            <button
+              className={`button-primary ${!hasNextPage && "disabled-btn"}`}
+              onClick={fetchNextPage}
+              disabled={!hasNextPage}
+            >
+              Load more
+            </button>
+          ) : (
+            ""
+          )}
         </div>
       </div>
       <div className="news-section">

@@ -22,9 +22,9 @@ export const createPost = (data) => {
 };
 
 // get all posts
-export const getAllPosts = (page) => {
+export const getAllPosts = ({ pageParam = 1 }) => {
   return request({
-    url: `${domainName}${api.allPosts}${page}`,
+    url: `${domainName}${api.allPosts}${pageParam}`,
     method: "get",
   });
 };

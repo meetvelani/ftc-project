@@ -26,6 +26,10 @@ import InputEmoji from "react-input-emoji";
 import { ReplyBox } from "./components/ReplyBox";
 import { CommentBox } from "./components/CommentBox";
 import defaulterImg from "../../assets/images/defaulter-avatar.png";
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en";
+TimeAgo.addDefaultLocale(en);
+
 
 const PDFViewer = ({ fileUrl }) => {
   const createFileUrl = (file) => {
@@ -42,16 +46,17 @@ const PDFViewer = ({ fileUrl }) => {
 };
 
 export const Post = ({ post }) => {
+    const timeAgo = new TimeAgo("en-US");
   const { pathname } = useLocation();
   const [activeSlide, setActiveSlide] = useState(0);
   const [newMessage, setNewMessage] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
-  const [comments, setComments] = useState([
-    { comment: "Comment show here" },
-    { comment: "hello" },
-    { comment: "hai" },
-    { comment: "hello" },
-  ]);
+  // const [comments, setComments] = useState([
+  //   { comment: "Comment show here" },
+  //   { comment: "hello" },
+  //   { comment: "hai" },
+  //   { comment: "hello" },
+  // ]);
 
   const [commentsShow, setCommentsShow] = useState(false);
   const [chaseStatus, setChaseStatus] = useState(false);
@@ -92,8 +97,10 @@ export const Post = ({ post }) => {
         <div className="left-side">
           <img src={post.dp ? post.dp : ProfileImg} alt="profile-img" />
           <div className="title-box">
-            <span>{post.title ? post.title : post.name}</span>
-            <span>8h ago</span>
+            <span>{`${post.user} declared ${post.defaulter_details.defaulter_name}`}</span>
+            <span>
+            {timeAgo.format(new Date(post.created_at))}
+            </span>
           </div>
         </div>
         {showDropdown && (
@@ -106,7 +113,7 @@ export const Post = ({ post }) => {
       <div className="post-details">
         <div className="description">
           <p className="text" id="descriptionText">
-            {post.description}
+            {post.post_details?.detail}
           </p>
         </div>
         <div className="card-item">
@@ -129,13 +136,14 @@ export const Post = ({ post }) => {
           <div className="right-side-card">
             <div className="header-section">
               <div className="profile-info">
-                <h2>Yash Panchal</h2>
+                <h2>{post.defaulter_details.defaulter_name}</h2>
                 <div className="info-box">
-                  <MdPhone className="icon" /> <span>+91 6847578728</span>
+                  <MdPhone className="icon" />{" "}
+                  <span>{post.defaulter_details?.phone_number}</span>
                 </div>
                 <div className="info-box">
                   <SiGmail className="icon" />{" "}
-                  <span>yashpanchal@gmail.com</span>
+                  <span>{post.defaulter_details?.email}</span>
                 </div>
               </div>
               <div className="download-icon">
@@ -146,20 +154,21 @@ export const Post = ({ post }) => {
             </div>
             <div className="bottom-section">
               <div className="item-box">
-                <AgeIcon className="icon age-icon" /> <span>23</span>
+                <AgeIcon className="icon age-icon" />{" "}
+                <span>{post.defaulter_details?.age}</span>
               </div>
               <div className="item-box">
                 <MdLocationOn className="icon" />
-                <span>Ahmedabad, Gujarat, India</span>
+                <span>{`${post.defaulter_details?.city}, ${post.defaulter_details?.state}, ${post.defaulter_details?.country}`}</span>
               </div>
               <div className="item-box position-box">
                 <IoBagSharp className="icon" />
-                <span>Web Developer at Technolab</span>
+                <span>{post.defaulter_details?.organization}</span>
               </div>
             </div>
           </div>
         </div>
-        {pathname === "/" && (
+        {/* {pathname === "/" && (
           <div className="slider-div">
             <Slider {...settings} className="slider">
               {post.postItems.map((item, index) => {
@@ -190,21 +199,21 @@ export const Post = ({ post }) => {
                       </div>
                     )}
                     {item.type === "document" && (
-                      <div className="slider-item" key={post.url}>
-                        {/* <Viewer fileUrl={post.url} /> */}
-                        <PDFViewer fileUrl={post.url} />
+                      <div className="slider-item" key={post.url}> */}
+        {/* <Viewer fileUrl={post.url} /> */}
+        {/* <PDFViewer fileUrl={post.url} />
                       </div>
                     )}
                     {item.type === "audio" && (
-                      <div className="slider-item" key={post.url}>
-                        {/* <ReactPlayer
+                      <div className="slider-item" key={post.url}> */}
+        {/* <ReactPlayer
                           url={post.url}
                           height="150px"
                           width="100%"
                           controls
                           autoplay={false}
                         /> */}
-                        <audio
+        {/* <audio
                           src={post.url}
                           height="50px"
                           width="100%"
@@ -215,16 +224,17 @@ export const Post = ({ post }) => {
                   </>
                 );
               })}
-            </Slider>
-          </div>
-        )}
+            </Slider> */}
+        {/* </div>
+        )} */}
         <div className="chases-comments-count">
           <div className="box">
             <span>0</span>
             <span> Chases</span>
           </div>
           <div className="box">
-            <span>{comments.length}</span>
+            {/* <span>{comments.length}</span> */}
+            <span>0</span>
             <span> Comments</span>
           </div>
         </div>
@@ -232,7 +242,7 @@ export const Post = ({ post }) => {
         <div className="options">
           <div>
             <div className="item" onClick={handleChaseClick}>
-              {chaseStatus ? (
+              {!chaseStatus ? (
                 <>
                   <MdFollowTheSigns className="item-icon" />
                   <span>Chase</span>
@@ -278,9 +288,10 @@ export const Post = ({ post }) => {
 
         {commentsShow && (
           <div className="comments-div">
-            {comments.map((item) => {
-              return <CommentBox post={post} item={item} />;
-            })}
+            {/* {comments.map((item) => { */}
+            <CommentBox />
+            {/* <CommentBox post={post} item={item} />; */}
+            {/* // })} */}
           </div>
         )}
 

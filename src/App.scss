@@ -77,6 +77,11 @@ input:focus {
   }
 }
 
+.disabled-btn{
+  background-color: #aaaaaa !important;
+  color: $color-secondary;
+}
+
 .underline-none {
   text-decoration: none;
 }

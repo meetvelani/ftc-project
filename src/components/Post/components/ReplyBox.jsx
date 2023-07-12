@@ -10,7 +10,7 @@ export const ReplyBox = ({ post }) => {
   };
   return (
     <div className="comment-box">
-      <img src={post.dp} alt="dp" className="dp-img" />
+      <img src={post?.dp} alt="dp" className="dp-img" />
       <div className="comment-input ">
         <InputEmoji value={replyComment} onChange={handleChange} />
         <MdSend className="icon" />

@@ -10,14 +10,15 @@ export const CommentBox = ({ post, item }) => {
   return (
     <div className="comment">
       <div className="comment-details">
-        <img src={post.dp} alt="" className="dp-img" />
+        <img src={post?.dp} alt="" className="dp-img" />
         <div>
           <span>Pranav</span>
-          <p>{item.comment}</p>
+          <p>hello</p>
         </div>
       </div>
       <span onClick={handleReplyShow}>Reply</span>
-      {reply && <ReplyBox post={post} />}
+      {reply && <ReplyBox />}
+      {/* {reply && <ReplyBox post={post} />} */}
     </div>
   );
 };

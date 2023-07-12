@@ -17,7 +17,6 @@ export const Navbar = () => {
   const [profileImg, setProfileImg] = useState(false);
   const navigate = useNavigate();
   const [{ userLoggedIn }, dispatch] = useStateValue();
-  console.log(userLoggedIn, "LOG");
 
   const logout = () => {
     sessionStorage.clear();
