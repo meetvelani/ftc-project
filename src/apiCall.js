@@ -14,6 +14,7 @@ export const signin = (data) => {
 
 // post create
 export const createPost = (data) => {
+  console.log(data,'Create Post DATA')
   return request({
     url: `${domainName}${api.createPost}`,
     method: "post",

@@ -10,9 +10,8 @@ import { FirstModal } from "./FirstModal";
 import { SecondModal } from "./SecondModal";
 import { ThirdModal } from "./ThirdModal";
 
-
 export const CreatePostModal = (props) => {
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
   const [modalPage, setModalPage] = useState(1);
   const [pincode, setPincode] = useState("");
   const [city, setCity] = useState("");
@@ -51,10 +50,10 @@ export const CreatePostModal = (props) => {
     onSuccess: (response) => {
       if (response.data?.post_id) {
         quitCreatePost();
-        queryClient.invalidateQueries('all-posts')
+        queryClient.invalidateQueries("all-posts");
         toast.success(response.data?.status[0]?.ResponseMessage);
       } else {
-        console.log(response,'response')
+        console.log(response, "response");
         toast.error("Post upload failed");
       }
       dispatch({ type: "SET_LOADING", status: false });
@@ -72,6 +71,8 @@ export const CreatePostModal = (props) => {
       city,
       state,
       country,
+      phone_number: values.phone_number || 0,
+      aadhar_number: values.aadhar_number || 0,
     };
     if (modalPage === 1) {
       dispatch({ type: "SET_CREATE_POST_DATA", data: values });
@@ -79,6 +80,7 @@ export const CreatePostModal = (props) => {
     }
     if (modalPage === 3) {
       dispatch({ type: "SET_LOADING", status: true });
+      console.log("createPostData", createPostData);
       postUploadMutation.mutate(createPostData);
     }
   };
@@ -91,7 +93,7 @@ export const CreatePostModal = (props) => {
     setState("");
     setCountry("");
     props.onHide();
-    setModalPage(1)
+    setModalPage(1);
   };
 
   return (

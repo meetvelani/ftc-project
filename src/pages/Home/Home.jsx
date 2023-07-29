@@ -19,46 +19,6 @@ export const Home = () => {
   // const [posts, setPosts] = useState([]);
   const [{ userLoggedIn }, dispatch] = useStateValue();
 
-  // const posts = [
-  // {
-  //   dp: ProfileImg,
-  //   name: "Pranav",
-  //   description: "Good morning",
-  //   postItems: [
-  //     { url: SliderImg1, type: "image" },
-  //     { url: SliderImg2, type: "image" },
-  //   ],
-  // },
-  // {
-  //   dp: ProfileImg,
-  //   name: "Pranav",
-  //   description: "Good morning",
-  //   postItems: [
-  //     // { url: video1, type: "video" },
-  //     // { url: video2, type: "video" },
-  //     // { url: video3, type: "video" },
-  //   ],
-  // },
-  // {
-  //   dp: ProfileImg,
-  //   name: "Pranav",
-  //   description: "Good morning",
-  //   postItems: [
-  //     // { url: pdf1, type: "document" },
-  //     // { url: pdf2, type: "document" },
-  //   ],
-  // },
-  // {
-  //   dp: ProfileImg,
-  //   name: "Pranav",
-  //   description: "Good morning",
-  //   postItems: [
-  //     // { url: audio, type: "audio" },
-  //     // { url: audio, type: "audio" },
-  //   ],
-  // },
-  // ];
-
   const {
     data: posts,
     isLoading,
@@ -104,11 +64,13 @@ export const Home = () => {
             onHide={() => setShowFormModal(false)}
             onNext={(status) => setShowConfirmationModal(status)}
           />
-          {posts?.pages[0].data.posts.posts.length === 0 && (
-            <h2>
-              There are no posts right now or check your internet connection
-            </h2>
-          )}
+          {posts
+            ? posts?.pages[0]?.data.posts.posts.length === 0 && (
+                <h2>
+                  There are no posts right now or check your internet connection
+                </h2>
+              )
+            : null}
         </div>
         <div className="posts">
           {posts &&
@@ -121,7 +83,7 @@ export const Home = () => {
                 </Fragment>
               );
             })}
-          {posts?.pages[0].data.posts.posts.length ? (
+          {posts && posts?.pages[0].data.posts.posts.length ? (
             <button
               className={`button-primary ${!hasNextPage && "disabled-btn"}`}
               onClick={fetchNextPage}
@@ -135,10 +97,7 @@ export const Home = () => {
         </div>
       </div>
       <div className="news-section">
-        {/* <div className="news-list"> */}
-        {/* <span>There's nothing to display</span> */}
         <News />
-        {/* </div> */}
       </div>
     </div>
   );
