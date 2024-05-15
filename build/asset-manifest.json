@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.b2ba3219.css",
+    "main.js": "/static/js/main.f68e486a.js",
+    "static/media/empty-notifications.png": "/static/media/empty-notifications.22289273a29d41f2a74b.png",
+    "static/media/defaulter-avatar.png": "/static/media/defaulter-avatar.05db219245ab93ff6a2c.png",
+    "static/media/postImg2.jpg": "/static/media/postImg2.ad5edbc43baaa375ea71.jpg",
+    "static/media/postImg1.webp": "/static/media/postImg1.066a87f227e2a03e7e2c.webp",
+    "static/media/sign-in-image.png": "/static/media/sign-in-image.aeecbd6177026415ec42.png",
+    "static/media/sign-up-image.png": "/static/media/sign-up-image.4946c7bb4c90fbc3d18b.png",
+    "static/media/personal.png": "/static/media/personal.5396f5bd79372ae41c8a.png",
+    "static/media/debate.png": "/static/media/debate.b9b58bbab148e7c3bbe2.png",
+    "static/media/logo-img.ico": "/static/media/logo-img.abab4b60e1f979ef4bd0.ico",
+    "static/media/add-media.svg": "/static/media/add-media.c4deb9dfe1fc98314ce65366eba98223.svg",
+    "static/media/age-icon.svg": "/static/media/age-icon.8b3620ffa55aaa1e2384b0ae24bb9abe.svg",
+    "static/media/add-photo.svg": "/static/media/add-photo.8c5231a33f34f5474acf230d207beb20.svg",
+    "index.html": "/index.html",
+    "static/media/add-document.svg": "/static/media/add-document.f9af313f5b1ec88c0a464141aaeca6d1.svg",
+    "main.b2ba3219.css.map": "/static/css/main.b2ba3219.css.map",
+    "main.f68e486a.js.map": "/static/js/main.f68e486a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b2ba3219.css",
+    "static/js/main.f68e486a.js"
+  ]
+}
